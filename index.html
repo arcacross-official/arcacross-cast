@@ -2,7 +2,7 @@
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js';
 import {getFirestore,collection,onSnapshot,doc,setDoc,deleteDoc,writeBatch} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js';
 import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js';
-const app=initializeApp({apiKey:'AIzaSyBoqWP2_wwVUkCXZH5eoGzRL0mFgSLLGPE',authDomain:'arcacross-cast.firebaseapp.com',projectId:'arcacross-cast',storageBucket:'arcacross-cast.firebasestorage.app',messagingSenderId:'39349991153',appId:'1:39349991153:web:c21e678558415530075b50'});
+const app=initializeApp({apiKey:'AIzaSyBOqWP2_wwVUkCXZH5eoGzRL0mFgSLLGPE',authDomain:'arcacross-cast.firebaseapp.com',projectId:'arcacross-cast',storageBucket:'arcacross-cast.firebasestorage.app',messagingSenderId:'39349991153',appId:'1:39349991153:web:c21e678558415530075b50'});
 const db=getFirestore(app),auth=getAuth(app),casts=collection(db,'casts');
 let members=[],editing=null,selected=null,picks=[],user=null,loaded=false;
 const $=id=>document.getElementById(id);
