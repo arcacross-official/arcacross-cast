@@ -105,13 +105,15 @@
 #cards .profile-link-hint{display:block;margin-top:10px;padding:7px 4px;border:1px solid #bda36e;border-radius:7px;background:#35304a;color:#ffe5a8;font-size:12px;font-weight:700;letter-spacing:.02em}
 #cards .card:hover .profile-link-hint{background:#544367}
 @media(max-width:420px){#cards .profile-link-hint{font-size:11px;padding:7px 2px}}
+
+.social-editor{margin:16px 0;padding:14px;border:1px solid #9e8251;border-radius:10px;background:#171c31}.social-editor h3{margin:0 0 4px;color:#f0d392}.social-links{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:14px auto}.social-link{display:inline-block;text-decoration:none;color:#f8e5b5;background:#34314b;border:1px solid #bca06a;border-radius:9px;padding:9px 12px;font-size:13px;font-weight:700;overflow-wrap:anywhere}.social-link:hover,.social-link:focus-visible{background:#534369;outline:2px solid #d9bd7d;outline-offset:1px}
 </style></head><body>
 <header><div class="sub">ARCACROSS · GUILD ARCHIVE</div><h1>キャスト一覧</h1><div class="sub">異世界の仲間たちをご紹介します</div></header>
 <main class="wrap">
 <section id="list">
 <h2 class="all-casts-heading">✦ キャスト一覧</h2><div id="cards" class="grid"></div><p id="empty" class="center sub">キャスト情報を読み込み中…</p>
 </section>
-<section id="detail" class="hidden detail panel center"><button class="secondary" id="backBtn">← 一覧へ</button><div><img id="detailImg" class="portrait" alt="キャスト写真"></div><h2 id="detailName"></h2><p id="detailHobby"></p><div id="detailFields" class="profile-fields"></div><div class="bio-box"><p id="detailIntro"></p></div><div id="gallerySection" class="bio-box hidden"><h3>PHOTO GALLERY</h3><div id="detailGallery" class="gallery-grid"></div></div></section>
+<section id="detail" class="hidden detail panel center"><button class="secondary" id="backBtn">← 一覧へ</button><div><img id="detailImg" class="portrait" alt="キャスト写真"></div><h2 id="detailName"></h2><p id="detailHobby"></p><div id="detailFields" class="profile-fields"></div><div id="detailSocial" class="social-links"></div><div class="bio-box"><p id="detailIntro"></p></div><div id="gallerySection" class="bio-box hidden"><h3>PHOTO GALLERY</h3><div id="detailGallery" class="gallery-grid"></div></div></section>
 </main>
 <div id="photoModal" class="modal-photo hidden"><img id="modalImg" alt="拡大写真"></div>
 <footer>ARCACROSS · Cast Archive</footer>
@@ -138,7 +140,9 @@ function render(){const box=$('cards');box.replaceChildren();const order=(a,b)=>
 function showDetail(){$('list').classList.add('hidden');$('detail').classList.remove('hidden');window.scrollTo(0,0)}
 function showList(){$('detail').classList.add('hidden');$('list').classList.remove('hidden');window.scrollTo(0,0)}
 function showPhoto(src){$('modalImg').src=src;$('photoModal').classList.remove('hidden')}
-function openDetail(id){selected=members.find(m=>m.id===id);if(!selected)return;$('detailImg').src=selected.photo||placeholder;$('detailName').textContent=selected.name;$('detailHobby').textContent=selected.hobby?'趣味：'+selected.hobby:'';$('detailIntro').textContent=selected.intro||'自己紹介は準備中です。';const fields=$('detailFields');fields.replaceChildren();for(const [label,value] of [['出身地',selected.hometown],['誕生日',selected.birthday?formatBirthday(selected.birthday):''],['キャラ',selected.character]]){if(value)fields.append(node('p',label+'：'+value))}const gal=$('detailGallery');gal.replaceChildren();const photos=Array.isArray(selected.gallery)?selected.gallery:[];$('gallerySection').classList.toggle('hidden',photos.length===0);photos.forEach(src=>{const img=node('img');img.src=src;img.alt=selected.name+'の追加写真';img.onclick=()=>showPhoto(src);gal.append(img)});showDetail()}
+
+function renderSocialLinks(target,m){const box=$(target);box.replaceChildren();for(const [label,idKey,urlKey,host] of [['Instagram','instagramId','instagramUrl','instagram.com'],['TikTok','tiktokId','tiktokUrl','tiktok.com'],['X (Twitter)','twitterId','twitterUrl','']]){const id=String(m[idKey]||'').trim();const raw=String(m[urlKey]||'').trim();if(!id&&!raw)continue;let url;try{url=new URL(raw);if(url.protocol!=='https:'||!url.hostname)continue;if(host&&!(url.hostname===host||url.hostname.endsWith('.'+host)))continue;if(!host&&!['x.com','www.x.com','twitter.com','www.twitter.com'].includes(url.hostname))continue}catch(e){continue}const a=node('a');a.className='social-link';a.href=url.href;a.target='_blank';a.rel='noopener noreferrer';const labelText=id?(id.startsWith('@')?id:'@'+id):'プロフィール';a.textContent=label+' · '+labelText+' ↗';box.append(a)}}
+function openDetail(id){selected=members.find(m=>m.id===id);if(!selected)return;$('detailImg').src=selected.photo||placeholder;$('detailName').textContent=selected.name;$('detailHobby').textContent=selected.hobby?'趣味：'+selected.hobby:'';$('detailIntro').textContent=selected.intro||'自己紹介は準備中です。';const fields=$('detailFields');fields.replaceChildren();for(const [label,value] of [['出身地',selected.hometown],['誕生日',selected.birthday?formatBirthday(selected.birthday):''],['キャラ',selected.character]]){if(value)fields.append(node('p',label+'：'+value))}renderSocialLinks('detailSocial',selected);const gal=$('detailGallery');gal.replaceChildren();const photos=Array.isArray(selected.gallery)?selected.gallery:[];$('gallerySection').classList.toggle('hidden',photos.length===0);photos.forEach(src=>{const img=node('img');img.src=src;img.alt=selected.name+'の追加写真';img.onclick=()=>showPhoto(src);gal.append(img)});showDetail()}
 function formatBirthday(s){const [m,d]=String(s).split('-');return Number(m)+'月'+Number(d)+'日'}
 
 $('backBtn').onclick=showList;
