@@ -109,7 +109,38 @@
 .social-editor{margin:16px 0;padding:14px;border:1px solid #9e8251;border-radius:10px;background:#171c31}.social-editor h3{margin:0 0 4px;color:#f0d392}.social-links{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:14px auto}.social-link{display:inline-block;text-decoration:none;color:#f8e5b5;background:#34314b;border:1px solid #bca06a;border-radius:9px;padding:9px 12px;font-size:13px;font-weight:700;overflow-wrap:anywhere}.social-link:hover,.social-link:focus-visible{background:#534369;outline:2px solid #d9bd7d;outline-offset:1px}
 
 :root{--gold:#dfc18b;--ink:#10172a;--panel:#1b2741;--line:#6c614d}html{scroll-behavior:smooth}body{background:radial-gradient(circle at 50% 0,#243a5a,#0b1122 55%)!important;color:#f5ebd5} .site-nav{position:sticky;top:0;z-index:30;background:#0b1222ed;border-bottom:1px solid #665637;display:flex;align-items:center;justify-content:space-between;padding:12px max(15px,calc((100vw - 1100px)/2));gap:12px}.brand{font-family:Georgia,serif;letter-spacing:.18em;color:var(--gold);font-weight:bold}.navlinks{display:flex;gap:12px;flex-wrap:wrap}.navlinks a{color:#e8d9b7;font-size:12px;text-decoration:none}.site-section{max-width:1100px;margin:0 auto;padding:60px 18px;scroll-margin-top:65px}.section-title{text-align:center;font-family:Georgia,serif;color:var(--gold);font-size:28px;letter-spacing:.14em;margin:0 0 8px}.section-sub{text-align:center;color:#afc1d7;font-size:12px;margin:0 0 26px}.hero{position:relative;min-height:350px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:radial-gradient(ellipse at center,#344b73,#111a32 65%);border-bottom:1px solid #9c8150;padding:55px 20px}.hero:before{content:'✦';position:absolute;font-size:310px;color:#c6a46d12;pointer-events:none}.hero h1{font-size:clamp(36px,7vw,75px);letter-spacing:.2em;color:#e7c98c;text-shadow:0 3px 30px #000}.hero p{letter-spacing:.2em}.gold-btn{display:inline-block;padding:11px 19px;border:1px solid #d6b87b;border-radius:8px;color:#f6e2b2;text-decoration:none;background:#3a3540}.event-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}.event-card{border:1px solid #87724d;background:#1a2640;border-radius:13px;overflow:hidden;cursor:pointer}.event-card img{display:block;width:100%;aspect-ratio:3/4;object-fit:contain;background:#10182a}.event-card .event-body{padding:14px}.event-card h3{margin:4px 0}.event-card p{font-size:13px;color:#d6c8ae}.featured-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:0 auto 30px}.featured-list img{width:100%;height:210px;object-fit:contain;background:#0e1428}.featured-list .event-card{border-color:#e3bd74}.hero-banners{max-width:1100px;margin:22px auto;padding:0 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.hero-banner{display:block;border:1px solid #c4a36b;border-radius:14px;overflow:hidden;background:#131b31}.hero-banner img{width:100%;max-height:330px;object-fit:contain;display:block}.hero-banner span{display:block;padding:10px 14px;color:#e9d4a6}.panel-text{background:#1b2741;border:1px solid #746445;border-radius:14px;padding:24px;white-space:pre-line;line-height:2;max-width:830px;margin:auto}.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:14px}.plan{background:#1b2741;border:1px solid #87724d;padding:20px;border-radius:13px}.plan h3{color:#e3c68b;margin-top:0}.plan strong{font-size:17px}.plan p{white-space:pre-line;font-size:13px;line-height:1.8}.custom-block{margin:22px auto;max-width:900px;text-align:center}.custom-block img{width:100%;max-height:600px;object-fit:contain;border-radius:10px}.custom-block p{white-space:pre-line}.empty-event{text-align:center;color:#b4a688}.event-dialog{position:fixed;inset:0;z-index:90;background:#000c;display:flex;justify-content:center;align-items:center;padding:15px}.event-dialog-inner{position:relative;max-height:90vh;overflow:auto;max-width:700px;width:100%;background:#19233d;border:1px solid #c6a16d;border-radius:15px;padding:18px;text-align:center}.event-dialog-inner img{max-width:100%;max-height:55vh;object-fit:contain}.event-dialog-inner button{position:absolute;right:10px;top:10px}.event-dialog-inner p{white-space:pre-line} .cast-wrap .wrap{padding:0}.cast-wrap .card img{height:185px} .site-section .panel{background:#20243b}.site-section .grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))} @media(max-width:550px){.navlinks{gap:8px}.navlinks a{font-size:10px}.site-section{padding:43px 14px}.hero{min-height:290px}.section-title{font-size:24px}}
-</style></head><body><nav class="site-nav"><span class="brand">ARCACROSS</span><div class="navlinks"><a href="#concept">CONCEPT</a><a href="#events">EVENT</a><a href="#cast">CAST</a><a href="#system">SYSTEM</a><a href="#access">ACCESS</a></div></nav><div class="hero"><p>異世界迷宮</p><h1>ARCACROSS</h1><p>迷宮の扉が、今宵開く。</p><a class="gold-btn" href="#events">最新イベントを見る</a></div><div id="heroBanners" class="hero-banners"></div><div id="siteSections"></div><div id="eventModal" class="event-dialog hidden"><div class="event-dialog-inner"><button id="eventClose" class="secondary">✕ 閉じる</button><div id="eventModalBody"></div></div></div><div id="photoModal" class="modal-photo hidden"><img id="modalImg" alt="拡大写真"></div><footer>© ARCACROSS</footer><script type="module">
+
+/* Mobile-first official site: compact opening and four-column cast directory */
+@media(max-width:600px){
+ .site-nav{padding:12px 14px;align-items:center;flex-wrap:wrap}
+ .brand{font-size:16px;letter-spacing:.12em}
+ .navlinks{gap:7px 11px;justify-content:flex-end}
+ .navlinks a{font-size:10px}
+ .hero{min-height:0;height:38svh;max-height:345px;padding:22px 12px;gap:5px}
+ .hero:before{font-size:220px}
+ .hero h1{font-size:clamp(29px,8.1vw,49px);letter-spacing:.11em;margin:0}
+ .hero p{font-size:13px;margin:6px 0;letter-spacing:.13em}
+ .hero .gold-btn{font-size:12px;padding:9px 14px;margin-top:6px}
+ .site-section{padding:30px 12px;scroll-margin-top:100px}
+ #concept{padding-top:22px;padding-bottom:15px}
+ #concept .section-title{font-size:20px;margin-bottom:3px}
+ #concept .section-sub{margin-bottom:10px}
+ #concept .panel-text{padding:12px 14px;font-size:12px;line-height:1.65}
+ #cast{padding-top:20px}
+ #cast .section-title{font-size:23px;margin-bottom:3px}
+ #cast .section-sub{margin-bottom:16px}
+ #cast #cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px 5px}
+ #cast #cards .card{min-width:0;padding:5px 3px 7px;border-radius:7px;border-width:1px}
+ #cast #cards .card>img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;margin-top:15px;border-radius:4px;display:block}
+ #cast #cards .card>strong{font-size:10px;line-height:1.3;margin-top:5px;overflow-wrap:anywhere}
+ #cast #cards .profile-link-hint{display:none}
+ #cast #cards .cast-badges{top:-6px;left:-4px;max-width:calc(100% + 8px);flex-wrap:wrap}
+ #cast #cards .cast-badge{font-size:7px;padding:2px 3px}
+ #cast #cards .duty-badge{font-size:7px;padding:1px 3px;top:2px}
+ .hero-banners{margin:10px auto}
+}
+@media(min-width:601px){#cast #cards{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}}
+</style></head><body><nav class="site-nav"><span class="brand">ARCACROSS</span><div class="navlinks"><a href="#concept">CONCEPT</a><a href="#cast">CAST</a><a href="#events">EVENT</a><a href="#system">SYSTEM</a><a href="#access">ACCESS</a></div></nav><div class="hero"><p>異世界迷宮</p><h1>ARCACROSS</h1><p>迷宮の扉が、今宵開く。</p><a class="gold-btn" href="#events">最新イベントを見る</a></div><div id="heroBanners" class="hero-banners"></div><div id="siteSections"></div><div id="eventModal" class="event-dialog hidden"><div class="event-dialog-inner"><button id="eventClose" class="secondary">✕ 閉じる</button><div id="eventModalBody"></div></div></div><div id="photoModal" class="modal-photo hidden"><img id="modalImg" alt="拡大写真"></div><footer>© ARCACROSS</footer><script type="module">
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js';
 import {getFirestore,collection,onSnapshot,doc} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js';
 const app=initializeApp({apiKey:'AIzaSyBOqWP2_wwVUkCXZH5eoGzRL0mFgSLLGPE',authDomain:'arcacross-cast.firebaseapp.com',projectId:'arcacross-cast',storageBucket:'arcacross-cast.firebasestorage.app',messagingSenderId:'39349991153',appId:'1:39349991153:web:c21e678558415530075b50'});
@@ -142,7 +173,7 @@ function renderSocialLinks(target,m){const box=$(target);box.replaceChildren();f
 function openDetail(id){selected=members.find(m=>m.id===id);if(!selected)return;$('detailImg').src=selected.photo||placeholder;$('detailName').textContent=selected.name;$('detailHobby').textContent=selected.hobby?'趣味：'+selected.hobby:'';$('detailIntro').textContent=selected.intro||'自己紹介は準備中です。';const fields=$('detailFields');fields.replaceChildren();for(const [label,value] of [['出身地',selected.hometown],['誕生日',selected.birthday?formatBirthday(selected.birthday):''],['キャラ',selected.character]]){if(value)fields.append(node('p',label+'：'+value))}renderSocialLinks('detailSocial',selected);const gal=$('detailGallery');gal.replaceChildren();const photos=Array.isArray(selected.gallery)?selected.gallery:[];$('gallerySection').classList.toggle('hidden',photos.length===0);photos.forEach(src=>{const img=node('img');img.src=src;img.alt=selected.name+'の追加写真';img.onclick=()=>showPhoto(src);gal.append(img)});showDetail()}
 function formatBirthday(s){const [m,d]=String(s).split('-');return Number(m)+'月'+Number(d)+'日'}
 
-$('backBtn').onclick=showList;
+// Back button is created dynamically; bind after rendering the cast section.
 $('photoModal').onclick=()=> $('photoModal').classList.add('hidden');
 onSnapshot(collection(db,'casts'),snapshot=>{members=snapshot.docs.map(d=>({id:d.id,...d.data()}));loaded=true;render()},e=>{console.error(e);$('empty').textContent='読み込みに失敗しました。管理者にお問い合わせください。'});
 
@@ -170,6 +201,7 @@ if(s){root.append(s);(site.blocks||[]).filter(b=>b.section===id&&b.visible!==fal
 }
 if(!document.getElementById('cast')){const hidden=el('div','hidden');hidden.id='cast';hidden.innerHTML="<div class=\"cast-wrap\"><section id=\"list\"><div id=\"cards\" class=\"grid\"></div><p id=\"empty\" class=\"center sub\">キャスト情報を読み込み中…</p></section><section id=\"detail\" class=\"hidden detail panel center\"><button class=\"secondary\" id=\"backBtn\">← 一覧へ</button><div><img id=\"detailImg\" class=\"portrait\" alt=\"キャスト写真\"></div><h2 id=\"detailName\"></h2><p id=\"detailHobby\"></p><div id=\"detailFields\" class=\"profile-fields\"></div><div id=\"detailSocial\" class=\"social-links\"></div><div class=\"bio-box\"><p id=\"detailIntro\"></p></div><div id=\"gallerySection\" class=\"bio-box hidden\"><h3>PHOTO GALLERY</h3><div id=\"detailGallery\" class=\"gallery-grid\"></div></div></section></div>";root.append(hidden)}
 render();
+const back=$('backBtn');if(back)back.onclick=showList;
 }
 window.arcOnSnapshot(window.arcDoc(window.arcDb,'siteContent','main'),snapshot=>{if(previewMode)return;site={...structuredClone(DEFAULTS),...(snapshot.exists()?snapshot.data():{})};renderSite()},err=>{console.error(err);renderSite()});
 
