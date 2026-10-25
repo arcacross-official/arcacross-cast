@@ -1,153 +1,34 @@
-<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>キャスト一覧 | アルカクロス</title><meta name="description" content="アルカクロスのキャスト一覧をご紹介します。"><style>:root{font-family:system-ui,sans-serif;color:#f5e9cb;background:#111527}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#303454,#111527 65%);min-height:100vh}header{text-align:center;padding:26px 12px;border-bottom:1px solid #9c8150}h1{font-family:serif;letter-spacing:.12em;margin:5px}p{line-height:1.6}.sub{color:#c9b58a}.wrap{max-width:1000px;margin:auto;padding:18px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:15px}.card,.panel{background:#20243b;border:1px solid #9e8251;border-radius:12px;padding:12px}.card{cursor:pointer;text-align:center}.card img{width:100%;height:185px;object-fit:cover;border-radius:8px;background:#353954}.card strong{display:block;margin-top:8px}button,input,textarea{font:inherit}button{border:1px solid #d9bd7d;background:#51402c;color:#fff2d2;border-radius:9px;padding:11px 16px;cursor:pointer;margin:4px}button.secondary{background:#252b43}button:disabled{opacity:.45;cursor:not-allowed}.card.picked{border:3px solid #eac979;box-shadow:0 0 0 2px #7b5c27 inset}.card.picked:after{content:"✓ 選択中";display:block;color:#f6d786;margin-top:5px}input,textarea{background:#11172b;color:white;border:1px solid #8e805f;border-radius:6px;padding:10px;width:100%;margin:5px 0 12px}textarea{min-height:70px}.hidden{display:none!important}.center{text-align:center}.detail{max-width:530px;margin:auto}.portrait{max-width:280px;width:100%;height:320px;object-fit:cover;border-radius:10px;background:#353954}.status{color:#dfc58b;font-size:13px}footer{text-align:center;padding:28px;color:#aa9c7e}label{display:block;margin-top:8px}.entry{display:flex;gap:12px;align-items:center;border-bottom:1px solid #61553f;padding:10px 0}.entry img{width:60px;height:70px;object-fit:cover}.entry>div{flex:1}.order-controls{display:flex;flex-direction:column;gap:3px}.order-controls button{padding:5px 10px;margin:1px;min-width:44px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:8px}.small{font-size:13px;color:#c9b58a}.selected-panel{margin-top:25px;padding:18px;background:#1b2036;border:1px solid #b89b62;border-radius:14px}.selected-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.selected-item{position:relative;text-align:center;background:#292d45;border:1px solid #b89b62;border-radius:10px;padding:9px;min-width:0}.selected-item img{width:100%;height:125px;object-fit:cover;border-radius:7px}.selected-item strong{display:block;margin-top:6px;overflow-wrap:anywhere}.selected-item .remove{position:absolute;right:2px;top:2px;border-radius:50%;width:30px;height:30px;padding:0;margin:0;background:#6a3040;font-weight:bold}.slot{border:1px dashed #756a59;border-radius:10px;min-height:175px;display:flex;align-items:center;justify-content:center;color:#a99a7e;text-align:center;font-size:13px}@media(max-width:420px){.selected-grid{gap:6px}.selected-item{padding:5px}.selected-item img{height:95px}.slot{min-height:145px}}
-/* Cast enhancements */
-.card{position:relative;overflow:visible}.frame-normal{--frame:#b9a888;border:2px solid var(--frame)}.frame-double{--frame:#b9a888;border:4px double var(--frame)}.frame-corner{--frame:#b9a888;border:2px solid var(--frame);box-shadow:inset 0 0 0 3px #20243b,inset 0 0 0 4px var(--frame)}.frame-elegant{--frame:#b9a888;border:2px solid var(--frame);box-shadow:0 0 0 1px var(--frame),0 4px 18px #0005}.frame-elegant:before,.frame-corner:before{content:'✦';position:absolute;right:7px;bottom:5px;color:var(--frame);font-size:13px;pointer-events:none}.card.picked{outline:2px solid #eac979;outline-offset:2px}.cast-badges{position:absolute;top:-9px;left:-7px;display:flex;flex-direction:column;align-items:flex-start;gap:3px;z-index:2;pointer-events:none}.cast-badge{font-size:10px;font-weight:800;letter-spacing:.03em;background:#d8bd7b;color:#272334;padding:4px 7px;border-radius:5px;box-shadow:0 2px 6px #0008}.cast-badge.hot{background:#d96c67;color:white}.cast-badge.new{background:#f0d68b}.cast-badge.birthday{background:#e3a4c4;color:#33233b}.selected-panel.top-selection{margin:0 0 22px;padding:12px}.top-selection .selected-item img{height:85px}.top-selection .slot{min-height:120px}.top-selection .selected-item{padding:5px}.top-selection .selected-item strong{font-size:12px}.top-selection .selected-grid{gap:7px}.bio-box{text-align:left;margin:18px auto;border:1px solid #aa9265;border-radius:10px;padding:14px;background:#171c31}.bio-box h3{font-size:14px;color:#e6cb93;margin:0 0 9px;letter-spacing:.08em}.bio-box p{white-space:pre-wrap;margin:0;color:#f3e8d2}.profile-fields{text-align:left;max-width:320px;margin:14px auto}.profile-fields p{margin:6px 0}.gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.gallery-grid img{width:100%;height:115px;object-fit:cover;border-radius:8px;cursor:pointer;border:1px solid #a28a5c}.gallery-manage{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.gallery-manage div{position:relative}.gallery-manage img{width:82px;height:96px;object-fit:cover;border-radius:6px}.gallery-manage button{position:absolute;top:0;right:0;padding:2px 6px;background:#873c4b}.modal-photo{position:fixed;inset:0;background:#000e;display:flex;align-items:center;justify-content:center;z-index:100;padding:25px;cursor:pointer}.modal-photo img{max-width:95vw;max-height:90vh;object-fit:contain}.frame-preview{border:1px solid #796b54;border-radius:8px;padding:12px;margin:8px 0;color:#dcc79d}.field-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}select{font:inherit;background:#11172b;color:white;border:1px solid #8e805f;border-radius:6px;padding:10px;width:100%;margin:5px 0 12px}
-
-/* Rich frame choices: elegant embellishments without covering cast faces */
-.frame-royal,.frame-floral,.frame-celestial,.frame-lace{position:relative;border:3px solid var(--frame);isolation:isolate}
-.frame-royal{box-shadow:inset 0 0 0 3px #20243b,inset 0 0 0 5px var(--frame),0 5px 18px #0006;border-radius:13px}
-.frame-royal::before{content:'❖';position:absolute;top:-15px;left:50%;transform:translateX(-50%);padding:0 9px;background:#20243b;color:var(--frame);font-size:22px;z-index:1}
-.frame-royal::after{content:'❖';position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);padding:0 9px;background:#20243b;color:var(--frame);font-size:20px}
-.frame-floral{border-radius:16px 5px 16px 5px;box-shadow:inset 0 0 0 2px #20243b,inset 0 0 0 3px var(--frame)}
-.frame-floral::before{content:'❀';position:absolute;top:-15px;right:-10px;color:var(--frame);font-size:29px;text-shadow:0 1px 4px #111527;background:#20243b;border-radius:50%;line-height:1}
-.frame-floral::after{content:'❀';position:absolute;bottom:-15px;left:-10px;color:var(--frame);font-size:29px;text-shadow:0 1px 4px #111527;background:#20243b;border-radius:50%;line-height:1}
-.frame-celestial{border-radius:13px;box-shadow:0 0 0 2px #20243b,0 0 0 3px var(--frame),0 0 15px color-mix(in srgb,var(--frame),transparent 65%)}
-.frame-celestial::before{content:'☾ ✧';position:absolute;top:-15px;right:7px;color:var(--frame);font-size:22px;line-height:1;background:#20243b;padding:0 5px}
-.frame-celestial::after{content:'✦ ✧ ✦';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);color:var(--frame);font-size:14px;letter-spacing:3px;background:#20243b;padding:0 7px;white-space:nowrap}
-.frame-lace{border-radius:15px;border:3px double var(--frame);outline:1px dotted var(--frame);outline-offset:3px;box-shadow:inset 0 0 0 3px #20243b,inset 0 0 0 4px var(--frame)}
-.frame-lace::before{content:'✧';position:absolute;top:-13px;right:-8px;font-size:23px;color:var(--frame);background:#20243b;line-height:1}
-.frame-lace::after{content:'✧';position:absolute;bottom:-13px;left:-8px;font-size:23px;color:var(--frame);background:#20243b;line-height:1}
-.bio-box:has(> #detailIntro),#previewBio{padding:15px 18px;background:transparent;border:1px solid #aa9265;border-radius:10px}
-.preview-overlay{position:fixed;inset:0;background:#050714df;z-index:80;overflow-y:auto;padding:20px 12px}
-.preview-window{max-width:800px;margin:10px auto;background:#20243b;border:1px solid #b9a888;border-radius:16px;padding:18px;box-shadow:0 15px 60px #000a}
-.preview-window .topbar{flex-wrap:wrap}.preview-window h2{margin:6px 0}
-.preview-content{display:grid;grid-template-columns:minmax(155px,220px) minmax(0,1fr);gap:24px;align-items:start;margin:16px 0}
-.preview-card{max-width:200px;margin:18px auto;cursor:default}.preview-detail{background:#171c31;border:1px solid #796b54;border-radius:12px;padding:15px;text-align:center}.preview-detail .portrait{height:260px;max-width:230px}.preview-detail .bio-box{margin:12px 0}.preview-detail .profile-fields{margin:12px auto}.preview-detail .gallery-grid img{height:90px}
-@media(max-width:560px){.preview-content{grid-template-columns:1fr;gap:10px}.preview-card{max-width:190px}.preview-window{padding:12px}}
-
-/* 管理者プレビュー */
-.admin-preview-modal{position:fixed;inset:0;z-index:1000;background:rgba(5,7,17,.92);overflow-y:auto;padding:18px 12px}
-.admin-preview-content{max-width:800px;margin:20px auto;background:#20243b;border:1px solid #b89b62;border-radius:16px;padding:18px}
-.admin-preview-content .preview-grid{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:22px;align-items:start}
-.admin-preview-content .preview-card{max-width:220px;margin:auto;width:100%}
-.admin-preview-content .preview-profile{min-width:0;text-align:center}
-.admin-preview-content .preview-profile>img{width:min(100%,260px);height:300px;object-fit:cover;border-radius:10px}
-.admin-preview-content .preview-profile .bio-box{margin:12px 0}
-@media(max-width:560px){.admin-preview-content .preview-grid{grid-template-columns:1fr}}
-.attendance-options{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0;padding:10px 12px;border:1px solid #786846;border-radius:10px;background:#171c31}.attendance-options label{margin:0}.duty-badge{display:block;position:relative;z-index:2;margin:5px auto 0;padding:3px 8px;width:max-content;max-width:100%;border:1px solid #80cba3;border-radius:20px;background:#183f33;color:#c5f5d6;font-size:11px;font-weight:700;letter-spacing:.03em}
-/* 管理画面：宣材写真タップで出勤を即時切り替え */
-.duty-photo-button{position:relative;display:block;flex:0 0 76px;width:76px;padding:3px;margin:0;border:2px solid #746b5b;border-radius:10px;background:#1a2034;overflow:hidden;cursor:pointer;transition:border-color .15s,box-shadow .15s}
-.duty-photo-button img{display:block;width:100%;height:86px;object-fit:cover;border-radius:5px}
-.duty-photo-button.is-duty{border-color:#5bd7a0;box-shadow:0 0 0 2px rgba(91,215,160,.18)}
-.duty-photo-label{position:absolute;bottom:3px;left:3px;right:3px;padding:3px 1px;border-radius:4px;background:rgba(10,17,30,.9);color:#e9e1d2;font-size:10px;font-weight:700;text-align:center;white-space:nowrap}
-.duty-photo-button.is-duty .duty-photo-label{background:#16764d;color:#fff}
-.duty-photo-button:disabled{opacity:.6;cursor:wait}
-.duty-admin-hint{margin:4px 0 15px}
-@media(max-width:500px){.entry{flex-wrap:wrap}.entry>div{min-width:95px}}
-
-/* Consistent portrait alignment regardless of attendance */
-#cards .card > img{margin-top:32px}
-#cards .card > .duty-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);margin:0;white-space:nowrap}
-
-/* Badge layout: one or two badges in a horizontal row */
-#cards .cast-badges, .preview-grid .cast-badges {
-  flex-direction:row;
-  flex-wrap:nowrap;
-  align-items:center;
-  gap:3px;
-  max-width:calc(100% + 12px);
-}
-#cards .cast-badge, .preview-grid .cast-badge {
-  font-size:9px;
-  padding:4px 5px;
-  white-space:nowrap;
-  line-height:1.15;
-}
-.cast-badge.pickup {
-  background:#8296e9;
-  color:#14224c;
-  border:1px solid #b5c4ff;
-}
-.cast-badge.new {
-  background:#9ce5cb;
-  color:#173c36;
-  border:1px solid #c5f8e5;
-}
-@media(max-width:520px){
-  #cards .cast-badge, .preview-grid .cast-badge {font-size:8px;padding:3px 4px}
-  #cards .cast-badges, .preview-grid .cast-badges {gap:2px}
-}
-
-/* 本日出勤専用エリア＋全キャスト一覧（出勤者も下段に再掲） */
-.attendance-section{margin-top:24px}
-.attendance-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
-.attendance-heading h2,.all-casts-heading{font-family:serif;color:#f0d392;letter-spacing:.035em}
-.attendance-heading h2{margin:0}
-.attendance-heading .small{padding:4px 12px;border:1px solid #8aaf9b;border-radius:99px;color:#b7efd0}
-.cast-section-divider{height:1px;background:linear-gradient(90deg,transparent,#c2a36a,transparent);margin:32px 0 22px}
-.all-casts-heading{margin:0 0 16px}
-#todayCards .card > img{margin-top:32px}
-#todayCards .card > .duty-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);margin:0;white-space:nowrap}
-#todayCards .cast-badges{flex-direction:row;flex-wrap:nowrap;align-items:center;gap:3px;max-width:calc(100% + 12px)}
-#todayCards .cast-badge{font-size:9px}
-
-/* Public-only page */
-.card{cursor:pointer}
-#todayCards .card>img,#cards .card>img{margin-top:32px}
-#todayCards .card>.duty-badge,#cards .card>.duty-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);margin:0;white-space:nowrap}
-#todayCards .cast-badges,#cards .cast-badges{flex-direction:row;flex-wrap:nowrap;gap:3px}
-#todayCards .cast-badge,#cards .cast-badge{font-size:9px;padding:4px 5px}
-.topbar h2{margin:0}
-
-/* Public cast cards: clear tap target and profile affordance */
-#cards .card{cursor:pointer;transition:transform .16s ease,box-shadow .16s ease}
-#cards .card:hover{transform:translateY(-3px);box-shadow:0 8px 22px #0007}
-#cards .card:focus-visible{outline:3px solid #f0d392;outline-offset:4px}
-#cards .profile-link-hint{display:block;margin-top:10px;padding:7px 4px;border:1px solid #bda36e;border-radius:7px;background:#35304a;color:#ffe5a8;font-size:12px;font-weight:700;letter-spacing:.02em}
-#cards .card:hover .profile-link-hint{background:#544367}
-@media(max-width:420px){#cards .profile-link-hint{font-size:11px;padding:7px 2px}}
-
-.social-editor{margin:16px 0;padding:14px;border:1px solid #9e8251;border-radius:10px;background:#171c31}.social-editor h3{margin:0 0 4px;color:#f0d392}.social-links{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:14px auto}.social-link{display:inline-block;text-decoration:none;color:#f8e5b5;background:#34314b;border:1px solid #bca06a;border-radius:9px;padding:9px 12px;font-size:13px;font-weight:700;overflow-wrap:anywhere}.social-link:hover,.social-link:focus-visible{background:#534369;outline:2px solid #d9bd7d;outline-offset:1px}
-</style></head><body>
-<header><div class="sub">ARCACROSS · GUILD ARCHIVE</div><h1>キャスト一覧</h1><div class="sub">異世界の仲間たちをご紹介します</div></header>
-<main class="wrap">
-<section id="list">
-<h2 class="all-casts-heading">✦ キャスト一覧</h2><div id="cards" class="grid"></div><p id="empty" class="center sub">キャスト情報を読み込み中…</p>
-</section>
-<section id="detail" class="hidden detail panel center"><button class="secondary" id="backBtn">← 一覧へ</button><div><img id="detailImg" class="portrait" alt="キャスト写真"></div><h2 id="detailName"></h2><p id="detailHobby"></p><div id="detailFields" class="profile-fields"></div><div id="detailSocial" class="social-links"></div><div class="bio-box"><p id="detailIntro"></p></div><div id="gallerySection" class="bio-box hidden"><h3>PHOTO GALLERY</h3><div id="detailGallery" class="gallery-grid"></div></div></section>
-</main>
-<div id="photoModal" class="modal-photo hidden"><img id="modalImg" alt="拡大写真"></div>
-<footer>ARCACROSS · Cast Archive</footer>
-<script type="module">
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>アルカクロス 公式サイト管理</title><style>
+:root{font-family:system-ui,sans-serif;color:#f4e9d4;background:#0e1729}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#263b5a,#0e1729 70%);min-height:100vh}.wrap{max-width:1050px;margin:auto;padding:22px 14px}h1,h2{color:#e9cc94}h1{font-family:Georgia,serif}h2{font-size:19px}p,.muted{color:#c2bbac;font-size:13px;line-height:1.6}.panel{background:#1b2941;border:1px solid #786748;border-radius:14px;padding:18px;margin:14px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}.item{border:1px solid #73664f;border-radius:10px;padding:13px;background:#182237;margin:9px 0}.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:space-between}.row>strong{flex:1}input,textarea,select{display:block;width:100%;border:1px solid #776c58;background:#0e1729;color:white;border-radius:8px;padding:11px;margin:7px 0 12px;font:inherit}textarea{min-height:90px;resize:vertical}label{display:block;font-size:13px;color:#e4cda1;margin-top:10px}button,.btn{background:#594932;border:1px solid #c4a66c;color:#fff1d2;border-radius:8px;padding:9px 12px;cursor:pointer;font:inherit;text-decoration:none;display:inline-block}button.secondary{background:#29354a}button.danger{background:#683b43}button:disabled{opacity:.5;cursor:not-allowed}.small{font-size:12px}.hidden{display:none!important}.sticky{position:sticky;top:0;z-index:10;background:#10192df0;padding:12px;border-bottom:1px solid #65573c}.notice{padding:10px 12px;border-radius:8px;background:#203a39;color:#c4efda;font-size:13px}.error{background:#482b34;color:#ffd9d9}.preview{width:100%;min-height:350px;border:1px solid #796c55;border-radius:12px;background:white}.preview-image{width:120px;max-height:180px;object-fit:contain;margin:8px 0;border-radius:7px}.drop{border:1px dashed #ae986b;padding:15px;border-radius:9px}.check{display:inline-flex;align-items:center;gap:5px;margin:8px 10px 8px 0}.check input{width:auto;margin:0}.dragging{opacity:.4}.drag-handle{cursor:grab;touch-action:none;color:#e3c990;font-size:22px;user-select:none} @media(max-width:550px){.wrap{padding:10px}.panel{padding:12px}.sticky{padding:8px}}
+</style></head><body><div class="sticky"><div class="wrap row" style="padding:0"><strong>⚜ ARCACROSS 公式サイト管理</strong><div><a class="btn" href="../public/" target="_blank">公式サイト ↗</a> <button id="logout" class="secondary hidden">ログアウト</button></div></div></div><main class="wrap"><section id="loginPanel" class="panel"><h2>管理者ログイン</h2><p>店舗用と同じFirebase管理者アカウントでログインしてください。</p><label>メールアドレス<input id="email" type="email" autocomplete="username"></label><label>パスワード<input id="password" type="password" autocomplete="current-password"></label><button id="login">ログイン</button><p id="loginMsg"></p></section><section id="editor" class="hidden"><div class="row"><div><h1>公式サイト編集</h1><p>下書き編集 → プレビュー → 公開。公開時にFirestoreへ保存します。</p></div><button id="publish">変更を公開する</button></div><p id="message" class="notice">読み込み中…</p><div class="panel"><h2>ページ構成・順番</h2><p>≡ をドラッグして並び替え。上下ボタンでも移動できます。</p><div id="sections"></div></div><div class="panel"><h2>CONCEPT</h2><label>世界観・コンセプト<textarea id="concept" rows="6"></textarea></label></div><div class="panel"><div class="row"><h2>EVENT｜イベント情報</h2><button id="addEvent">＋ イベント追加</button></div><p>イベントは複数画像を登録できます。トップ大型バナー、上部固定、通常一覧を個別に設定できます。開催後も削除せず残せます。</p><div id="events"></div></div><div class="panel"><div class="row"><h2>SYSTEM｜料金プラン</h2><button id="addPlan">＋ プラン追加</button></div><div id="plans"></div><label>注意事項<textarea id="notices" rows="7"></textarea></label></div><div class="panel"><h2>ACCESS</h2><label>営業時間<input id="hours"></label><label>所在地<input id="address"></label><label>GoogleマップURL<input id="mapUrl" placeholder="https://maps.google.com/..."></label><label>公式Instagram URL<input id="instagram" placeholder="https://www.instagram.com/..."></label></div><div class="panel"><div class="row"><h2>追加コンテンツ</h2><button id="addBlock">＋ 画像・文章ブロック</button></div><p>画像や文章を好きなセクションの下へ追加できます。</p><div id="blocks"></div></div><div class="panel"><h2>プレビュー</h2><p>保存前の下書きをプレビュー表示します。</p><button id="preview">下書きをプレビュー</button><iframe id="previewFrame" class="preview hidden" title="プレビュー"></iframe></div><div class="row"><button id="publishBottom">変更を公開する</button><span class="muted">店舗用キャスト管理画面は変更しません。</span></div></section></main><script type="module">
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js';
-import {getFirestore,collection,onSnapshot} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js';
-const app=initializeApp({apiKey:'AIzaSyBOqWP2_wwVUkCXZH5eoGzRL0mFgSLLGPE',authDomain:'arcacross-cast.firebaseapp.com',projectId:'arcacross-cast',storageBucket:'arcacross-cast.firebasestorage.app',messagingSenderId:'39349991153',appId:'1:39349991153:web:c21e678558415530075b50'});
-const db=getFirestore(app);
-let members=[],selected=null,loaded=false;
-const $=id=>document.getElementById(id);
-const placeholder='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="300" height="400"><rect width="100%" height="100%" fill="#353954"/><text x="50%" y="50%" text-anchor="middle" fill="#c9b58a" font-size="24">NO PHOTO</text></svg>');
-
-function node(tag,text){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e}
-function frameClass(m){return 'frame-'+(['normal','double','corner','elegant','royal','floral','celestial','lace'].includes(m.frameStyle)?m.frameStyle:'normal')}
-function birthdayMonth(m){if(!m.birthday)return false;const n=Number(String(m.birthday).split('-')[0]);return n===Number(new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Tokyo',month:'numeric'}).format(new Date()))}
-function addBadges(card,m){const labels=[];if(m.castMark==='pickup')labels.push(['✦ PICK UP!','pickup']);if(m.castMark==='new')labels.push(['🐣 NEW','new']);if(m.castMark==='hot')labels.push(['🔥 HOT!','hot']);if(birthdayMonth(m))labels.push(['🎂 BIRTHDAY','birthday']);if(!labels.length)return;const wrap=node('div');wrap.className='cast-badges';for(const [label,type] of labels){const b=node('span',label);b.className='cast-badge '+type;wrap.append(b)}card.append(wrap)}
-function styleCard(c,m){c.classList.add(frameClass(m));c.style.setProperty('--frame',/^#[0-9a-f]{6}$/i.test(m.frameColor||'')?m.frameColor:'#b9a888');addBadges(c,m)}
-function displayPriority(m){return m.pinnedRole?0:m.onDuty?1:2}
-function sortedVisibleMembers(){return members.filter(m=>m.active).sort((a,b)=>displayPriority(a)-displayPriority(b)||(a.order??0)-(b.order??0))}
-function addDutyBadge(card,m){if(!m.onDuty)return;const badge=node('span','● 本日出勤');badge.className='duty-badge';card.append(badge)}
-
-function createCastCard(m){const c=node('div');c.className='card';styleCard(c,m);const img=node('img');img.src=m.photo||placeholder;img.alt=m.name;img.loading='lazy';const title=node('strong',m.name);const hint=node('span','プロフィールを見る ›');hint.className='profile-link-hint';c.append(img,title,hint);c.setAttribute('role','button');c.setAttribute('tabindex','0');c.setAttribute('aria-label',m.name+'のプロフィールを見る');c.onclick=()=>openDetail(m.id);c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openDetail(m.id)}};return c}
-function render(){const box=$('cards');box.replaceChildren();const order=(a,b)=>Number(!!b.pinnedRole)-Number(!!a.pinnedRole)||(a.order??0)-(b.order??0);const all=members.filter(m=>m.active).sort(order);all.forEach(m=>box.append(createCastCard(m)));$('empty').textContent=all.length?'':'現在公開中のキャストはいません。'}
-function showDetail(){$('list').classList.add('hidden');$('detail').classList.remove('hidden');window.scrollTo(0,0)}
-function showList(){$('detail').classList.add('hidden');$('list').classList.remove('hidden');window.scrollTo(0,0)}
-function showPhoto(src){$('modalImg').src=src;$('photoModal').classList.remove('hidden')}
-
-function socialUrl(kind,id){const handle=String(id||'').trim().replace(/^@+/,'');if(!handle)return '';if(!/^[A-Za-z0-9._]+$/.test(handle))return '';const base={instagram:'https://www.instagram.com/',tiktok:'https://www.tiktok.com/@',twitter:'https://x.com/'}[kind];return base?base+encodeURIComponent(handle)+(kind==='instagram'?'/':''):''}
-function renderSocialLinks(target,m){const box=$(target);box.replaceChildren();for(const [label,key,kind,legacy] of [['Instagram','instagramId','instagram','instagramUrl'],['TikTok','tiktokId','tiktok','tiktokUrl'],['X (Twitter)','twitterId','twitter','twitterUrl']]){const id=String(m[key]||'').trim();let url=socialUrl(kind,id);if(!url&&!id&&m[legacy]){try{const parsed=new URL(m[legacy]);if(parsed.protocol==='https:'&&((kind==='instagram'&&['instagram.com','www.instagram.com'].includes(parsed.hostname))||(kind==='tiktok'&&['tiktok.com','www.tiktok.com'].includes(parsed.hostname))||(kind==='twitter'&&['x.com','www.x.com','twitter.com','www.twitter.com'].includes(parsed.hostname))))url=parsed.href}catch(e){}}if(!url)continue;const a=node('a');a.className='social-link';a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.textContent=label+' · '+(id?(id.startsWith('@')?id:'@'+id):'プロフィール')+' ↗';box.append(a)}}
-
-function openDetail(id){selected=members.find(m=>m.id===id);if(!selected)return;$('detailImg').src=selected.photo||placeholder;$('detailName').textContent=selected.name;$('detailHobby').textContent=selected.hobby?'趣味：'+selected.hobby:'';$('detailIntro').textContent=selected.intro||'自己紹介は準備中です。';const fields=$('detailFields');fields.replaceChildren();for(const [label,value] of [['出身地',selected.hometown],['誕生日',selected.birthday?formatBirthday(selected.birthday):''],['キャラ',selected.character]]){if(value)fields.append(node('p',label+'：'+value))}renderSocialLinks('detailSocial',selected);const gal=$('detailGallery');gal.replaceChildren();const photos=Array.isArray(selected.gallery)?selected.gallery:[];$('gallerySection').classList.toggle('hidden',photos.length===0);photos.forEach(src=>{const img=node('img');img.src=src;img.alt=selected.name+'の追加写真';img.onclick=()=>showPhoto(src);gal.append(img)});showDetail()}
-function formatBirthday(s){const [m,d]=String(s).split('-');return Number(m)+'月'+Number(d)+'日'}
-
-$('backBtn').onclick=showList;
-$('photoModal').onclick=()=> $('photoModal').classList.add('hidden');
-onSnapshot(collection(db,'casts'),snapshot=>{members=snapshot.docs.map(d=>({id:d.id,...d.data()}));loaded=true;render()},e=>{console.error(e);$('empty').textContent='読み込みに失敗しました。管理者にお問い合わせください。'});
+import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js';
+import {getFirestore,doc,getDoc,setDoc} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js';
+import {getStorage,ref,uploadBytes,getDownloadURL} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-storage.js';
+const app=initializeApp({apiKey:'AIzaSyBOqWP2_wwVUkCXZH5eoGzRL0mFgSLLGPE',authDomain:'arcacross-cast.firebaseapp.com',projectId:'arcacross-cast',storageBucket:'arcacross-cast.firebasestorage.app',messagingSenderId:'39349991153',appId:'1:39349991153:web:c21e678558415530075b50'});const auth=getAuth(app),db=getFirestore(app),storage=getStorage(app),siteRef=doc(db,'siteContent','main');
+const DEFAULTS={"concept": "アルカクロス。それは、どこかにある不思議な大陸。決して帰ることのできない美しき迷宮…。異世界に迷い込んだお嬢様に、ひとときの安らぎをもたらすため、我らナイトが心ゆくまでお仕え致します。", "plans": [{"title": "チャージ制", "price": "60分 1,000円（税込1,100円）", "description": "延長30分 500円（税込550円）／60分毎に1オーダー・自動延長制"}, {"title": "飲み放題制", "price": "60分 3,000円（税込3,300円）", "description": "60分単位の自動延長制"}, {"title": "異世界迷宮セット（初回限定）", "price": "3,000円（税込3,300円）", "description": "チャージ60分＋ドリンク1杯＋キャストリボン杯＋2ショットチェキ1枚。ドリンク・キャストリボンは各1,000円以内。"}, {"title": "異世界満喫セット（お一人様1回）", "price": "10,000円（税込11,000円）", "description": "チャージ60分＋1万円以内のボトル1本"}], "notices": "ご来店時に身分証のご提示をお願いしております。\n身分証をご提示いただけない場合は、ご入店をお断りする場合があります。\n店内は全面禁煙です。\n混雑時は2時間制となる場合があります。", "hours": "19:00〜24:00（L.O.23:30）", "address": "", "mapUrl": "", "instagram": "", "sections": ["concept", "events", "cast", "system", "access"], "events": [], "blocks": []};let data=structuredClone(DEFAULTS),dirty=false;const $=id=>document.getElementById(id);const sectionNames={concept:'CONCEPT｜世界観',events:'EVENT｜イベント',cast:'CAST｜キャスト',system:'SYSTEM｜料金',access:'ACCESS｜店舗案内'};
+function mk(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n}
+function btn(text,fn,cls='secondary'){const b=mk('button',text,cls);b.type='button';b.onclick=fn;return b}
+function field(label,value,fn,multiline=false){const wrap=mk('label',label);const input=mk(multiline?'textarea':'input');input.value=value??'';input.oninput=()=>{fn(input.value);dirty=true};wrap.append(input);return wrap}
+function checkbox(label,checked,fn){const l=mk('label',undefined,'check'),i=mk('input');i.type='checkbox';i.checked=!!checked;i.onchange=()=>{fn(i.checked);dirty=true};l.append(i,mk('span',label));return l}
+function move(a,i,d){const j=i+d;if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];dirty=true;render()}
+function status(t,error=false){$('message').textContent=t;$('message').classList.toggle('error',error)}
+function reorderBox(list,i,label,rerender){const r=mk('div',undefined,'row');const handle=mk('span','⠿','drag-handle');handle.title='ドラッグで並べ替え';r.append(handle,mk('strong',label),btn('↑',()=>move(list,i,-1)),btn('↓',()=>move(list,i,1)));r.draggable=true;r.ondragstart=e=>{e.dataTransfer.setData('text/plain',String(i));r.classList.add('dragging')};r.ondragend=()=>r.classList.remove('dragging');r.ondragover=e=>e.preventDefault();r.ondrop=e=>{e.preventDefault();const from=Number(e.dataTransfer.getData('text/plain'));if(Number.isInteger(from)&&from>=0&&from<list.length&&from!==i){const x=list.splice(from,1)[0];list.splice(i,0,x);dirty=true;rerender()}};return r}
+function renderSections(){const c=$('sections');c.replaceChildren();data.sections.forEach((id,i)=>{const r=mk('div',undefined,'item');r.append(reorderBox(data.sections,i,sectionNames[id],render));c.append(r)})}
+function renderPlans(){const c=$('plans');c.replaceChildren();data.plans.forEach((p,i)=>{const box=mk('div',undefined,'item');const h=reorderBox(data.plans,i,p.title||'料金プラン',render);h.append(btn('削除',()=>{if(confirm('この料金プランを削除しますか？')){data.plans.splice(i,1);dirty=true;render()}},'danger'));box.append(h,field('プラン名',p.title,v=>p.title=v),field('料金',p.price,v=>p.price=v),field('説明',p.description,v=>p.description=v,true));c.append(box)})}
+function uploadField(images,onAdd){const w=mk('div',undefined,'drop');w.append(mk('p','画像をアップロード（複数選択可・各5MBまで）'));const input=mk('input');input.type='file';input.accept='image/*';input.multiple=true;input.onchange=async()=>{if(!auth.currentUser){alert('ログインしてください');return}input.disabled=true;status('画像をアップロードしています…');try{for(const file of input.files){if(file.size>5*1024*1024)throw Error('5MBを超える画像があります。圧縮してから登録してください。');const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');const path='site-events/'+auth.currentUser.uid+'/'+Date.now()+'-'+Math.random().toString(36).slice(2)+'-'+safe;const storageRef=ref(storage,path);await uploadBytes(storageRef,file,{contentType:file.type});onAdd(await getDownloadURL(storageRef))}dirty=true;render();status('画像のアップロード完了。公開ボタンで反映されます。')}catch(e){status('画像アップロード失敗：'+e.message+'（Storageの利用設定・ルールをご確認ください）',true)}finally{input.disabled=false}};w.append(input);images.forEach((url,i)=>{const row=mk('div',undefined,'row');const img=mk('img',undefined,'preview-image');img.src=url;row.append(img,btn('画像を外す',()=>{images.splice(i,1);dirty=true;render()},'danger'));w.append(row)});return w}
+function renderEvents(){const c=$('events');c.replaceChildren();data.events.forEach((e,i)=>{const box=mk('div',undefined,'item');const h=reorderBox(data.events,i,e.title||'新しいイベント',render);h.append(btn('削除',()=>{if(confirm('イベントを削除しますか？')){data.events.splice(i,1);dirty=true;render()}},'danger'));box.append(h,field('イベント名',e.title,v=>e.title=v),field('開催日時（自由入力）',e.date,v=>e.date=v),field('詳細説明',e.description,v=>e.description=v,true),field('チケット・詳細リンク',e.link,v=>e.link=v));const flags=mk('div');flags.append(checkbox('公開',e.published!==false,v=>e.published=v),checkbox('注目イベントとして固定',e.pinned,v=>e.pinned=v),checkbox('トップ大型バナーに表示',e.hero,v=>e.hero=v));box.append(flags,uploadField(e.images,src=>e.images.push(src)),field('画像URLを直接追加（1行1URL）','',v=>{e._pendingUrls=v},true));const add=btn('画像URLを追加',()=>{const arr=String(e._pendingUrls||'').split(/\s+/).filter(v=>/^https?:\/\//.test(v));e.images.push(...arr);e._pendingUrls='';dirty=true;render()});box.append(add);c.append(box)})}
+function renderBlocks(){const c=$('blocks');c.replaceChildren();data.blocks.forEach((b,i)=>{const box=mk('div',undefined,'item');const h=reorderBox(data.blocks,i,b.type==='image'?'画像ブロック':'文章ブロック',render);h.append(btn('削除',()=>{data.blocks.splice(i,1);dirty=true;render()},'danger'));box.append(h);const select=mk('select');for(const id of data.sections){const o=mk('option',sectionNames[id]);o.value=id;select.append(o)}select.value=b.section;select.onchange=()=>{b.section=select.value;dirty=true};box.append(mk('label','表示位置'),select);box.append(checkbox('表示する',b.visible!==false,v=>b.visible=v));const type=mk('select');for(const t of ['image','text']){const o=mk('option',t==='image'?'画像＋文章':'文章のみ');o.value=t;type.append(o)}type.value=b.type;type.onchange=()=>{b.type=type.value;dirty=true;render()};box.append(mk('label','ブロック種類'),type);if(b.type==='image')box.append(uploadField(b.src?[b.src]:[],src=>b.src=src),field('画像URL',b.src||'',v=>b.src=v));box.append(field('本文・説明',b.text||'',v=>b.text=v,true));c.append(box)})}
+function render(){renderSections();renderPlans();renderEvents();renderBlocks();for(const id of ['concept','notices','hours','address','mapUrl','instagram'])$(id).value=data[id]||''}
+for(const id of ['concept','notices','hours','address','mapUrl','instagram'])$(id).oninput=e=>{data[id]=e.target.value;dirty=true};
+$('addEvent').onclick=()=>{data.events.unshift({title:'',date:'',description:'',link:'',images:[],published:true,pinned:false,hero:false});dirty=true;render();$('events').scrollIntoView({behavior:'smooth'})};
+$('addPlan').onclick=()=>{data.plans.push({title:'',price:'',description:''});dirty=true;render()};
+$('addBlock').onclick=()=>{data.blocks.push({type:'image',section:'events',src:'',text:'',visible:true});dirty=true;render()};
+$('login').onclick=async()=>{try{$('loginMsg').textContent='ログイン中…';await signInWithEmailAndPassword(auth,$('email').value.trim(),$('password').value);$('password').value=''}catch(e){$('loginMsg').textContent='ログイン失敗：'+e.message}};
+$('logout').onclick=()=>signOut(auth);
+onAuthStateChanged(auth,async user=>{$('loginPanel').classList.toggle('hidden',!!user);$('editor').classList.toggle('hidden',!user);$('logout').classList.toggle('hidden',!user);if(!user)return;try{const snap=await getDoc(siteRef);data={...structuredClone(DEFAULTS),...(snap.exists()?snap.data():{})};data.events=(data.events||[]).map(e=>({...e,images:e.images||[]}));render();status('編集できます。公開するまでお客様のサイトは変わりません。')}catch(e){status('読み込みに失敗：'+e.message+'（Firestoreのアクセス権をご確認ください）',true)}});
+async function publish(){if(!auth.currentUser)return;const save=structuredClone(data);save.events.forEach((e,i)=>{delete e._pendingUrls;e.order=i});try{status('公開中…');await setDoc(siteRef,save);dirty=false;status('公開しました！公式サイトを更新してご確認ください。')}catch(e){status('公開に失敗：'+e.message+'（Firestoreの管理者書き込み権限をご確認ください）',true)}}
+$('publish').onclick=publish;$('publishBottom').onclick=publish;
+$('preview').onclick=()=>{const frame=$('previewFrame');frame.classList.remove('hidden');const base='../public/';frame.onload=()=>frame.contentWindow.postMessage({type:'arcacross-site-preview',payload:structuredClone(data)},location.origin);frame.src=base;status('下書きプレビューを開きました。内容を変更したらもう一度プレビューを押してください。')};
+window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
 </script></body></html>
