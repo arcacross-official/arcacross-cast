@@ -97,6 +97,14 @@
 #todayCards .cast-badges,#cards .cast-badges{flex-direction:row;flex-wrap:nowrap;gap:3px}
 #todayCards .cast-badge,#cards .cast-badge{font-size:9px;padding:4px 5px}
 .topbar h2{margin:0}
+
+/* Public cast cards: clear tap target and profile affordance */
+#cards .card{cursor:pointer;transition:transform .16s ease,box-shadow .16s ease}
+#cards .card:hover{transform:translateY(-3px);box-shadow:0 8px 22px #0007}
+#cards .card:focus-visible{outline:3px solid #f0d392;outline-offset:4px}
+#cards .profile-link-hint{display:block;margin-top:10px;padding:7px 4px;border:1px solid #bda36e;border-radius:7px;background:#35304a;color:#ffe5a8;font-size:12px;font-weight:700;letter-spacing:.02em}
+#cards .card:hover .profile-link-hint{background:#544367}
+@media(max-width:420px){#cards .profile-link-hint{font-size:11px;padding:7px 2px}}
 </style></head><body>
 <header><div class="sub">ARCACROSS · GUILD ARCHIVE</div><h1>キャスト一覧</h1><div class="sub">異世界の仲間たちをご紹介します</div></header>
 <main class="wrap">
@@ -125,7 +133,7 @@ function displayPriority(m){return m.pinnedRole?0:m.onDuty?1:2}
 function sortedVisibleMembers(){return members.filter(m=>m.active).sort((a,b)=>displayPriority(a)-displayPriority(b)||(a.order??0)-(b.order??0))}
 function addDutyBadge(card,m){if(!m.onDuty)return;const badge=node('span','● 本日出勤');badge.className='duty-badge';card.append(badge)}
 
-function createCastCard(m){const c=node('div');c.className='card';styleCard(c,m);const img=node('img');img.src=m.photo||placeholder;img.alt=m.name;img.loading='lazy';const title=node('strong',m.name);c.append(img,title);c.onclick=()=>openDetail(m.id);return c}
+function createCastCard(m){const c=node('div');c.className='card';styleCard(c,m);const img=node('img');img.src=m.photo||placeholder;img.alt=m.name;img.loading='lazy';const title=node('strong',m.name);const hint=node('span','プロフィールを見る ›');hint.className='profile-link-hint';c.append(img,title,hint);c.setAttribute('role','button');c.setAttribute('tabindex','0');c.setAttribute('aria-label',m.name+'のプロフィールを見る');c.onclick=()=>openDetail(m.id);c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openDetail(m.id)}};return c}
 function render(){const box=$('cards');box.replaceChildren();const order=(a,b)=>Number(!!b.pinnedRole)-Number(!!a.pinnedRole)||(a.order??0)-(b.order??0);const all=members.filter(m=>m.active).sort(order);all.forEach(m=>box.append(createCastCard(m)));$('empty').textContent=all.length?'':'現在公開中のキャストはいません。'}
 function showDetail(){$('list').classList.add('hidden');$('detail').classList.remove('hidden');window.scrollTo(0,0)}
 function showList(){$('detail').classList.add('hidden');$('list').classList.remove('hidden');window.scrollTo(0,0)}
