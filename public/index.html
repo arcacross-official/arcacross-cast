@@ -141,6 +141,10 @@
 }
 @media(min-width:601px){#cast #cards{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}}
 
+/* Photo gallery lightbox: always-visible close control on mobile */
+.modal-photo{z-index:1001;padding:70px 12px 24px;overscroll-behavior:contain}
+.modal-photo img{max-width:100%;max-height:calc(100dvh - 110px);object-fit:contain}
+.photo-close{position:absolute;position:fixed;top:max(14px,env(safe-area-inset-top));right:max(14px,env(safe-area-inset-right));z-index:1002;min-height:48px;min-width:94px;padding:10px 16px;border:2px solid #f0d392;border-radius:999px;background:#18243b;color:#fff4d8;font-size:16px;font-weight:700;box-shadow:0 4px 20px #000a;cursor:pointer}
 /* Compact mobile landing, event image previews and accessible menu */
 .mobile-menu-toggle{display:none}
 .hero-event-previews{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:min(440px,100%);margin-top:8px}
@@ -167,7 +171,7 @@
  #cast{padding-top:12px}
  #cast .section-sub{margin-bottom:10px}
 }
-</style></head><body><nav class="site-nav"><span class="brand">ARCACROSS</span><button class="mobile-menu-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileNav">☰</button><div class="navlinks" id="mobileNav"><a href="#concept">CONCEPT</a><a href="#cast">CAST</a><a href="#events">EVENT</a><a href="#system">SYSTEM</a><a href="#access">ACCESS</a></div></nav><div class="hero"><p>異世界迷宮</p><h1>ARCACROSS</h1><p>迷宮の扉が、今宵開く。</p><div class="hero-event-previews" id="heroEventPreviews"></div><a class="gold-btn hero-event-fallback" id="heroEventFallback" href="#events">最新イベントを見る</a></div><div id="heroBanners" class="hero-banners"></div><div id="siteSections"></div><div id="eventModal" class="event-dialog hidden"><div class="event-dialog-inner"><button id="eventClose" class="secondary">✕ 閉じる</button><div id="eventModalBody"></div></div></div><div id="photoModal" class="modal-photo hidden"><img id="modalImg" alt="拡大写真"></div><footer>© ARCACROSS</footer><script>
+</style></head><body><nav class="site-nav"><span class="brand">ARCACROSS</span><button class="mobile-menu-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileNav">☰</button><div class="navlinks" id="mobileNav"><a href="#concept">CONCEPT</a><a href="#cast">CAST</a><a href="#events">EVENT</a><a href="#system">SYSTEM</a><a href="#access">ACCESS</a></div></nav><div class="hero"><p>異世界迷宮</p><h1>ARCACROSS</h1><p>迷宮の扉が、今宵開く。</p><div class="hero-event-previews" id="heroEventPreviews"></div><a class="gold-btn hero-event-fallback" id="heroEventFallback" href="#events">最新イベントを見る</a></div><div id="heroBanners" class="hero-banners"></div><div id="siteSections"></div><div id="eventModal" class="event-dialog hidden"><div class="event-dialog-inner"><button id="eventClose" class="secondary">✕ 閉じる</button><div id="eventModalBody"></div></div></div><div id="photoModal" class="modal-photo hidden" role="dialog" aria-modal="true" aria-label="写真の拡大表示"><button id="photoClose" class="photo-close" type="button" aria-label="拡大写真を閉じる">✕ 閉じる</button><img id="modalImg" alt="拡大写真"></div><footer>© ARCACROSS</footer><script>
 (function(){const b=document.querySelector('.mobile-menu-toggle'),n=document.getElementById('mobileNav');if(!b||!n)return;b.addEventListener('click',()=>{const open=n.classList.toggle('is-open');b.setAttribute('aria-expanded',String(open));b.setAttribute('aria-label',open?'メニューを閉じる':'メニューを開く');b.textContent=open?'✕':'☰'});n.addEventListener('click',e=>{if(e.target.closest('a')){n.classList.remove('is-open');b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','メニューを開く');b.textContent='☰'}})})();
 </script><script type="module">
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js';
@@ -203,7 +207,10 @@ function openDetail(id){selected=members.find(m=>m.id===id);if(!selected)return;
 function formatBirthday(s){const [m,d]=String(s).split('-');return Number(m)+'月'+Number(d)+'日'}
 
 // Back button is created dynamically; bind after rendering the cast section.
-$('photoModal').onclick=()=> $('photoModal').classList.add('hidden');
+function closePhoto(){ $('photoModal').classList.add('hidden'); $('modalImg').removeAttribute('src'); }
+$('photoClose').onclick=e=>{e.stopPropagation();closePhoto()};
+$('photoModal').onclick=e=>{if(e.target===$('photoModal'))closePhoto()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('photoModal').classList.contains('hidden'))closePhoto()});
 onSnapshot(collection(db,'casts'),snapshot=>{members=snapshot.docs.map(d=>({id:d.id,...d.data()}));loaded=true;render()},e=>{console.error(e);$('empty').textContent='読み込みに失敗しました。管理者にお問い合わせください。'});
 
 
