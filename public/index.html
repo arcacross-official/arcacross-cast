@@ -140,7 +140,36 @@
  .hero-banners{margin:10px auto}
 }
 @media(min-width:601px){#cast #cards{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}}
-</style></head><body><nav class="site-nav"><span class="brand">ARCACROSS</span><div class="navlinks"><a href="#concept">CONCEPT</a><a href="#cast">CAST</a><a href="#events">EVENT</a><a href="#system">SYSTEM</a><a href="#access">ACCESS</a></div></nav><div class="hero"><p>異世界迷宮</p><h1>ARCACROSS</h1><p>迷宮の扉が、今宵開く。</p><a class="gold-btn" href="#events">最新イベントを見る</a></div><div id="heroBanners" class="hero-banners"></div><div id="siteSections"></div><div id="eventModal" class="event-dialog hidden"><div class="event-dialog-inner"><button id="eventClose" class="secondary">✕ 閉じる</button><div id="eventModalBody"></div></div></div><div id="photoModal" class="modal-photo hidden"><img id="modalImg" alt="拡大写真"></div><footer>© ARCACROSS</footer><script type="module">
+
+/* Compact mobile landing, event image previews and accessible menu */
+.mobile-menu-toggle{display:none}
+.hero-event-previews{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:min(440px,100%);margin-top:8px}
+.hero-event-previews:empty{display:none}
+.hero-event-thumb{display:flex;flex-direction:column;overflow:hidden;min-width:0;border:1px solid #c7a875;border-radius:9px;background:#141c30;color:#f1d6a2;text-decoration:none;text-align:left}
+.hero-event-thumb img{display:block;width:100%;height:105px;object-fit:contain;background:#11172b}
+.hero-event-thumb span{display:block;padding:5px 7px;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hero-event-fallback[hidden]{display:none!important}
+@media(max-width:600px){
+ .site-nav{flex-wrap:nowrap;min-height:54px}
+ .mobile-menu-toggle{display:block;margin-left:auto;background:transparent;color:#e9cb8d;border:1px solid #947a4d;border-radius:8px;padding:6px 10px;font-size:19px;line-height:1}
+ .navlinks{display:none;position:absolute;top:100%;left:0;right:0;background:#0b1222;border-bottom:1px solid #947a4d;padding:13px;gap:0;box-shadow:0 8px 20px #0006}
+ .navlinks.is-open{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+ .navlinks a{font-size:12px;text-align:center;padding:8px 3px}
+ .hero{height:auto;min-height:210px;max-height:none;padding:23px 12px 19px;gap:2px}
+ .hero h1{font-size:clamp(29px,8vw,42px);margin:2px 0}
+ .hero p{font-size:12px;margin:3px 0}
+ .hero-event-previews{gap:8px;width:min(320px,100%);margin-top:7px}
+ .hero-event-thumb img{height:73px}
+ .hero-event-thumb span{font-size:10px;padding:4px 6px}
+ .hero .gold-btn{margin-top:7px}
+ #concept{padding-top:14px;padding-bottom:9px}
+ #concept .panel-text{padding:9px 12px;font-size:11px;line-height:1.55}
+ #cast{padding-top:12px}
+ #cast .section-sub{margin-bottom:10px}
+}
+</style></head><body><nav class="site-nav"><span class="brand">ARCACROSS</span><button class="mobile-menu-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileNav">☰</button><div class="navlinks" id="mobileNav"><a href="#concept">CONCEPT</a><a href="#cast">CAST</a><a href="#events">EVENT</a><a href="#system">SYSTEM</a><a href="#access">ACCESS</a></div></nav><div class="hero"><p>異世界迷宮</p><h1>ARCACROSS</h1><p>迷宮の扉が、今宵開く。</p><div class="hero-event-previews" id="heroEventPreviews"></div><a class="gold-btn hero-event-fallback" id="heroEventFallback" href="#events">最新イベントを見る</a></div><div id="heroBanners" class="hero-banners"></div><div id="siteSections"></div><div id="eventModal" class="event-dialog hidden"><div class="event-dialog-inner"><button id="eventClose" class="secondary">✕ 閉じる</button><div id="eventModalBody"></div></div></div><div id="photoModal" class="modal-photo hidden"><img id="modalImg" alt="拡大写真"></div><footer>© ARCACROSS</footer><script>
+(function(){const b=document.querySelector('.mobile-menu-toggle'),n=document.getElementById('mobileNav');if(!b||!n)return;b.addEventListener('click',()=>{const open=n.classList.toggle('is-open');b.setAttribute('aria-expanded',String(open));b.setAttribute('aria-label',open?'メニューを閉じる':'メニューを開く');b.textContent=open?'✕':'☰'});n.addEventListener('click',e=>{if(e.target.closest('a')){n.classList.remove('is-open');b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','メニューを開く');b.textContent='☰'}})})();
+</script><script type="module">
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js';
 import {getFirestore,collection,onSnapshot,doc} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js';
 const app=initializeApp({apiKey:'AIzaSyBOqWP2_wwVUkCXZH5eoGzRL0mFgSLLGPE',authDomain:'arcacross-cast.firebaseapp.com',projectId:'arcacross-cast',storageBucket:'arcacross-cast.firebasestorage.app',messagingSenderId:'39349991153',appId:'1:39349991153:web:c21e678558415530075b50'});
@@ -189,7 +218,16 @@ function makeImage(src,alt){const img=el('img');img.loading='lazy';img.src=safeU
 function eventCard(e){const c=el('article','event-card');if(e.images?.[0])c.append(makeImage(e.images[0],e.title));const b=el('div','event-body');b.append(el('h3','',e.title||'イベント'),el('p','',e.date||''));c.append(b);c.tabIndex=0;c.setAttribute('role','button');c.onclick=()=>openEvent(e);c.onkeydown=x=>{if(x.key==='Enter')openEvent(e)};return c}
 function openEvent(e){const b=document.getElementById('eventModalBody');b.replaceChildren();b.append(el('h2','',e.title||'イベント'));if(e.date)b.append(el('p','',e.date));for(const src of (e.images||[])){b.append(makeImage(src,e.title))}if(e.description)b.append(el('p','',e.description));if(safeUrl(e.link)){const a=el('a','gold-btn','詳細・チケットはこちら');a.href=safeUrl(e.link);a.target='_blank';a.rel='noopener noreferrer';b.append(a)}document.getElementById('eventModal').classList.remove('hidden')}
 document.getElementById('eventClose').onclick=()=>document.getElementById('eventModal').classList.add('hidden');document.getElementById('eventModal').addEventListener('click',e=>{if(e.target.id==='eventModal')e.currentTarget.classList.add('hidden')});
-function renderSite(){const root=document.getElementById('siteSections');const existingCast=document.querySelector('.cast-wrap');if(existingCast)existingCast.remove();root.replaceChildren();const events=(site.events||[]).filter(e=>e.published!==false);const banners=document.getElementById('heroBanners');banners.replaceChildren();events.filter(e=>e.hero&&e.images?.length).sort((a,b)=>(a.order||0)-(b.order||0)).forEach(e=>{const a=el('a','hero-banner');a.href='#events';a.append(makeImage(e.images[0],e.title),el('span','',e.title));a.onclick=x=>{x.preventDefault();openEvent(e)};banners.append(a)});
+function renderSite(){const root=document.getElementById('siteSections');const existingCast=document.querySelector('.cast-wrap');if(existingCast)existingCast.remove();root.replaceChildren();const events=(site.events||[]).filter(e=>e.published!==false);const heroPreviews=document.getElementById('heroEventPreviews');
+heroPreviews.replaceChildren();
+const featuredEvents=[...events].filter(e=>Array.isArray(e.images)&&e.images.some(safeUrl)).sort((a,b)=>Number(!!b.pinned)-Number(!!a.pinned));
+featuredEvents.slice(0,2).forEach(e=>{
+ const a=el('a','hero-event-thumb');a.href='#events';a.setAttribute('aria-label',e.title+'：イベント一覧を見る');
+ a.append(makeImage(e.images.find(safeUrl),e.title));
+ a.append(el('span','',e.title));heroPreviews.append(a);
+});
+document.getElementById('heroEventFallback').hidden=featuredEvents.length>0;
+const banners=document.getElementById('heroBanners');banners.replaceChildren();events.filter(e=>e.hero&&e.images?.length).sort((a,b)=>(a.order||0)-(b.order||0)).forEach(e=>{const a=el('a','hero-banner');a.href='#events';a.append(makeImage(e.images[0],e.title),el('span','',e.title));a.onclick=x=>{x.preventDefault();openEvent(e)};banners.append(a)});
 for(const id of (site.sections||DEFAULTS.sections)){
 let s;
 if(id==='concept'){s=section(id,'CONCEPT','アルカクロスの世界へ');s.append(el('div','panel-text',site.concept||''))}
