@@ -82,7 +82,7 @@ function uploadField(images,onAdd,limit=2){
  return w
 }
 let topicFilter='upcoming',editingTopic=-1,publishing=false;
-function topicPast(e){if(!e.endDate)return false;const end=String(e.endDate).trim();return /^\\d{4}-\\d{2}-\\d{2}$/.test(end)&&end<new Date().toLocaleDateString('sv-SE',{timeZone:'Asia/Tokyo'})}
+function topicPast(e){if(!e.endDate)return false;const end=String(e.endDate).trim();return /^\d{4}-\d{2}-\d{2}$/.test(end)&&end<new Date().toLocaleDateString('sv-SE',{timeZone:'Asia/Tokyo'})}
 function topicGroup(e){if(e.published===false)return 'hidden';return topicPast(e)?'past':'upcoming'}
 function openTopic(i){editingTopic=i;renderTopicEditor();$('topicModal').classList.remove('hidden');document.body.style.overflow='hidden'}
 function closeTopic(){editingTopic=-1;$('topicModal').classList.add('hidden');document.body.style.overflow=''}
@@ -96,7 +96,7 @@ function renderTopicEditor(){
  box.append(field('イベント名',e.title,v=>{e.title=v;$('topicModalTitle').textContent=v||'新しいTOPICS'}),field('開催日時（自由入力）',e.date,v=>e.date=v),field('終了日（自動アーカイブ用・YYYY-MM-DD）',e.endDate||'',v=>e.endDate=v),field('詳細説明',e.description,v=>e.description=v,true),field('チケット・詳細リンク',e.link,v=>e.link=v));
  const flags=mk('div');flags.append(checkbox('公開',e.published!==false,v=>e.published=v),checkbox('注目イベントとして固定',e.pinned,v=>e.pinned=v),checkbox('トップ大型バナーに表示',e.hero,v=>e.hero=v));box.append(flags);
  box.append(uploadField(e.images,src=>e.images.push(src),2),field('画像URLを直接追加（1行1URL）',e._pendingUrls||'',v=>{e._pendingUrls=v},true));
- box.append(btn('画像URLを追加',()=>{const arr=String(e._pendingUrls||'').split(/\\s+/).filter(v=>/^https?:\\/\\//.test(v));e.images.push(...arr.slice(0,Math.max(0,2-e.images.length)));e._pendingUrls='';dirty=true;render();openTopic(i)}));
+ box.append(btn('画像URLを追加',()=>{const arr=String(e._pendingUrls||'').split(/\s+/).filter(v=>/^https?:\/\//.test(v));e.images.push(...arr.slice(0,Math.max(0,2-e.images.length)));e._pendingUrls='';dirty=true;render();openTopic(i)}));
  const foot=mk('div',undefined,'row');foot.style.marginTop='18px';
  foot.append(btn('← 一覧に戻る',()=>{closeTopic();renderEvents()}),btn('このTOPICSを削除',()=>{if(confirm('このTOPICSを削除しますか？')){data.events.splice(i,1);dirty=true;closeTopic();renderEvents()}},'danger'));
  box.append(foot)
