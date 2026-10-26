@@ -191,6 +191,32 @@
 .topics-swipe-hint{color:#e9cb8d;font-size:13px;margin:8px 0 15px}
 @media(max-width:600px){.topics-track .event-card{flex-basis:82vw}.event-dialog-inner{width:100%;padding-left:10px;padding-right:10px}.topics-arrow{width:42px;height:42px}}
 .topics-archive{margin-top:24px;border-top:1px solid #947a4d;padding-top:15px}.topics-archive summary{cursor:pointer;color:#e9cc94;padding:12px;font-weight:bold}.topics-archive .topics-track{margin-top:10px}
+
+/* Compact opening and pinned TOPICS above CAST */
+#heroEventPreviews,#heroEventFallback,#heroBanners{display:none!important}
+.pinned-topics{padding-top:12px;padding-bottom:8px}
+.pinned-topics .section-title{font-size:20px;margin-bottom:10px}
+.pinned-topics .section-sub{display:none}
+.pinned-topics .topics-track{padding-bottom:8px;gap:10px}
+.pinned-topics .event-card{flex:0 0 min(65vw,310px)}
+.pinned-topics .event-card img{width:100%;aspect-ratio:16/9;object-fit:contain}
+.pinned-topics .event-body{display:none}
+#events .event-body{display:none}
+@media(max-width:600px){
+ .hero{min-height:0!important;height:auto!important;padding:9px 10px 7px!important}
+ .hero h1{font-size:clamp(25px,7vw,34px)!important;margin:0!important}
+ .hero p{font-size:10px!important;margin:0!important;line-height:1.3}
+ #concept{padding-top:6px!important;padding-bottom:3px!important}
+ #concept .section-title{font-size:15px!important;margin-bottom:2px}
+ #concept .section-sub{display:none}
+ #concept .panel-text{padding:6px 9px!important;font-size:10px!important;line-height:1.35!important}
+ .pinned-topics{padding:7px 12px 3px!important}
+ .pinned-topics .section-title{font-size:16px!important;margin-bottom:5px}
+ .pinned-topics .topics-track{gap:8px;padding:2px 2px 5px}
+ .pinned-topics .event-card{flex-basis:min(60vw,245px)!important}
+ #cast{padding-top:5px!important}
+ #cast .section-sub{margin-bottom:6px!important}
+}
 </style></head><body><nav class="site-nav"><span class="brand">ARCACROSS</span><button class="mobile-menu-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileNav">☰</button><div class="navlinks" id="mobileNav"><a href="#concept">CONCEPT</a><a href="#cast">CAST</a><a href="#events">TOPICS</a><a href="#system">SYSTEM</a><a href="#access">ACCESS</a></div></nav><div class="hero"><p>異世界迷宮</p><h1>ARCACROSS</h1><p>迷宮の扉が、今宵開く。</p><div class="hero-event-previews" id="heroEventPreviews"></div><a class="gold-btn hero-event-fallback" id="heroEventFallback" href="#events">最新TOPICSを見る</a></div><div id="heroBanners" class="hero-banners"></div><div id="siteSections"></div><div id="eventModal" class="event-dialog hidden"><div class="event-dialog-inner"><button id="eventClose" class="secondary">✕ 閉じる</button><div id="eventModalBody"></div></div></div><div id="photoModal" class="modal-photo hidden" role="dialog" aria-modal="true" aria-label="写真の拡大表示"><button id="photoClose" class="photo-close" type="button" aria-label="拡大写真を閉じる">✕ 閉じる</button><img id="modalImg" alt="拡大写真"></div><footer>© ARCACROSS</footer><script>
 (function(){const b=document.querySelector('.mobile-menu-toggle'),n=document.getElementById('mobileNav');if(!b||!n)return;b.addEventListener('click',()=>{const open=n.classList.toggle('is-open');b.setAttribute('aria-expanded',String(open));b.setAttribute('aria-label',open?'メニューを閉じる':'メニューを開く');b.textContent=open?'✕':'☰'});n.addEventListener('click',e=>{if(e.target.closest('a')){n.classList.remove('is-open');b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','メニューを開く');b.textContent='☰'}})})();
 </script><script type="module">
@@ -255,30 +281,36 @@ function eventCard(e){const c=el('article','event-card');const images=(e.images|
 let topicIndex=0,topicImages=[];
 function setTopicImage(index){if(!topicImages.length)return;topicIndex=(index+topicImages.length)%topicImages.length;const img=document.getElementById('topicActiveImage');if(img){const current=topicImages[topicIndex];topicImageSource(current).then(url=>{if(topicImages[topicIndex]===current)img.src=url})}const count=document.getElementById('topicImageCount');if(count)count.textContent=(topicIndex+1)+' / '+topicImages.length+' 枚';document.querySelectorAll('.topics-dot').forEach((d,i)=>{d.classList.toggle('active',i===topicIndex);d.setAttribute('aria-current',String(i===topicIndex))})}
 function closeEvent(){document.getElementById('eventModal').classList.add('hidden')}
-function openEvent(e){const b=document.getElementById('eventModalBody');b.replaceChildren();if(e.title)b.append(el('h2','',e.title));if(e.date)b.append(el('p','',e.date));topicImages=(e.images||[]).filter(validTopicImage);topicIndex=0;if(topicImages.length){const stage=el('div','topics-image-stage');const img=makeImage(topicImages[0],e.title||'告知画像');img.id='topicActiveImage';img.draggable=false;stage.append(img);if(topicImages.length>1){const prev=el('button','topics-arrow prev','‹');prev.type='button';prev.setAttribute('aria-label','前の画像');prev.onclick=()=>setTopicImage(topicIndex-1);const next=el('button','topics-arrow next','›');next.type='button';next.setAttribute('aria-label','次の画像');next.onclick=()=>setTopicImage(topicIndex+1);stage.append(prev,next);let touchX=null;stage.addEventListener('touchstart',ev=>{touchX=ev.changedTouches[0].clientX},{passive:true});stage.addEventListener('touchend',ev=>{if(touchX===null)return;const diff=ev.changedTouches[0].clientX-touchX;touchX=null;if(Math.abs(diff)>40)setTopicImage(topicIndex+(diff<0?1:-1))},{passive:true})}b.append(stage);if(topicImages.length>1){const count=el('p','topics-count');count.id='topicImageCount';b.append(count);const dots=el('div','topics-pager');topicImages.forEach((_,i)=>{const d=el('button','topics-dot');d.type='button';d.setAttribute('aria-label',(i+1)+'枚目の画像');d.onclick=()=>setTopicImage(i);dots.append(d)});b.append(dots,el('p','topics-swipe-hint','⇆ 左右にスワイプして他の画像を見る'));setTopicImage(0)}}if(e.description)b.append(el('p','',e.description));if(safeUrl(e.link)){const a=el('a','gold-btn','詳細はこちら');a.href=safeUrl(e.link);a.target='_blank';a.rel='noopener noreferrer';b.append(a)}document.getElementById('eventModal').classList.remove('hidden')}
+function openEvent(e){const b=document.getElementById('eventModalBody');b.replaceChildren();topicImages=(e.images||[]).filter(validTopicImage);topicIndex=0;if(topicImages.length){const stage=el('div','topics-image-stage');const img=makeImage(topicImages[0],e.title||'告知画像');img.id='topicActiveImage';img.draggable=false;stage.append(img);if(topicImages.length>1){const prev=el('button','topics-arrow prev','‹');prev.type='button';prev.setAttribute('aria-label','前の画像');prev.onclick=()=>setTopicImage(topicIndex-1);const next=el('button','topics-arrow next','›');next.type='button';next.setAttribute('aria-label','次の画像');next.onclick=()=>setTopicImage(topicIndex+1);stage.append(prev,next);let touchX=null;stage.addEventListener('touchstart',ev=>{touchX=ev.changedTouches[0].clientX},{passive:true});stage.addEventListener('touchend',ev=>{if(touchX===null)return;const diff=ev.changedTouches[0].clientX-touchX;touchX=null;if(Math.abs(diff)>40)setTopicImage(topicIndex+(diff<0?1:-1))},{passive:true})}b.append(stage);if(topicImages.length>1){const count=el('p','topics-count');count.id='topicImageCount';b.append(count);const dots=el('div','topics-pager');topicImages.forEach((_,i)=>{const d=el('button','topics-dot');d.type='button';d.setAttribute('aria-label',(i+1)+'枚目の画像');d.onclick=()=>setTopicImage(i);dots.append(d)});b.append(dots,el('p','topics-swipe-hint','⇆ 左右にスワイプして他の画像を見る'));setTopicImage(0)}}if(e.description)b.append(el('p','',e.description));if(safeUrl(e.link)){const a=el('a','gold-btn','詳細はこちら');a.href=safeUrl(e.link);a.target='_blank';a.rel='noopener noreferrer';b.append(a)}document.getElementById('eventModal').classList.remove('hidden')}
 document.getElementById('eventClose').onclick=closeEvent;
 document.getElementById('eventModal').addEventListener('click',e=>{if(e.target.id==='eventModal')closeEvent()});
 document.addEventListener('keydown',e=>{if(document.getElementById('eventModal').classList.contains('hidden'))return;if(e.key==='Escape')closeEvent();if(e.key==='ArrowRight'&&topicImages.length>1)setTopicImage(topicIndex+1);if(e.key==='ArrowLeft'&&topicImages.length>1)setTopicImage(topicIndex-1)});
 function renderSite(){const root=document.getElementById('siteSections');const existingCast=document.querySelector('.cast-wrap');if(existingCast)existingCast.remove();root.replaceChildren();const events=(site.events||[]).filter(e=>e.published!==false);const heroPreviews=document.getElementById('heroEventPreviews');
-heroPreviews.replaceChildren();
-const featuredEvents=[...events].filter(e=>Array.isArray(e.images)&&e.images.some(validTopicImage)).sort((a,b)=>Number(!!b.pinned)-Number(!!a.pinned));
-featuredEvents.slice(0,2).forEach(e=>{
- const a=el('a','hero-event-thumb');a.href='#events';a.setAttribute('aria-label',e.title+'：TOPICSを見る');
- a.append(makeImage(e.images.find(validTopicImage),e.title));
- a.append(el('span','',e.title));heroPreviews.append(a);
-});
-document.getElementById('heroEventFallback').hidden=featuredEvents.length>0;
-const banners=document.getElementById('heroBanners');banners.replaceChildren();events.filter(e=>e.hero&&e.images?.length).sort((a,b)=>(a.order||0)-(b.order||0)).forEach(e=>{const a=el('a','hero-banner');a.href='#events';a.append(makeImage(e.images[0],e.title),el('span','',e.title));a.onclick=x=>{x.preventDefault();openEvent(e)};banners.append(a)});
+ heroPreviews.replaceChildren();
+ document.getElementById('heroEventFallback').hidden=true;
+ document.getElementById('heroBanners').replaceChildren();
+ const pinnedEvents=events.filter(e=>e.pinned&&Array.isArray(e.images)&&e.images.some(validTopicImage));
+ const oldPinned=document.getElementById('pinnedTopics');if(oldPinned)oldPinned.remove();
+ if(pinnedEvents.length){
+  const pin=section('pinnedTopics','TOPICS','');pin.classList.add('pinned-topics');
+  const track=el('div','topics-track');pinnedEvents.forEach(e=>track.append(eventCard(e)));
+  pin.append(track);root.append(pin);
+ }
 for(const id of (site.sections||DEFAULTS.sections)){
 let s;
 if(id==='concept'){s=section(id,'CONCEPT','アルカクロスの世界へ');s.append(el('div','panel-text',site.concept||''))}
-if(id==='events'){s=section(id,'TOPICS','迷宮からのお知らせ');const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());const isPast=e=>/^\d{4}-\d{2}-\d{2}$/.test(e.endDate||'')&&e.endDate<today;const current=events.filter(e=>!isPast(e)).sort((a,b)=>Number(!!b.pinned)-Number(!!a.pinned)||(a.order??0)-(b.order??0));const past=events.filter(isPast).sort((a,b)=>(b.endDate||'').localeCompare(a.endDate||''));if(current.length){s.append(el('p','topics-guide','⇆ 横にスライドしてお知らせを見る'));const track=el('div','topics-track');track.setAttribute('aria-label','最新のお知らせ・横スクロール');current.forEach(e=>track.append(eventCard(e)));s.append(track)}if(past.length){const details=el('details','topics-archive');const summary=el('summary','','過去のTOPICSを見る（'+past.length+'件）');details.append(summary);const track=el('div','topics-track');past.forEach(e=>track.append(eventCard(e)));details.append(track);s.append(details)}if(!events.length)s.append(el('p','empty-event','現在公開中のお知らせはありません。'))}
+if(id==='events'){s=section(id,'TOPICS','迷宮からのお知らせ');const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());const isPast=e=>/^\d{4}-\d{2}-\d{2}$/.test(e.endDate||'')&&e.endDate<today;const current=events.filter(e=>!isPast(e)&&!e.pinned).sort((a,b)=>Number(!!b.pinned)-Number(!!a.pinned)||(a.order??0)-(b.order??0));const past=events.filter(isPast).sort((a,b)=>(b.endDate||'').localeCompare(a.endDate||''));if(current.length){s.append(el('p','topics-guide','⇆ 横にスライドしてお知らせを見る'));const track=el('div','topics-track');track.setAttribute('aria-label','最新のお知らせ・横スクロール');current.forEach(e=>track.append(eventCard(e)));s.append(track)}if(past.length){const details=el('details','topics-archive');const summary=el('summary','','過去のTOPICSを見る（'+past.length+'件）');details.append(summary);const track=el('div','topics-track');past.forEach(e=>track.append(eventCard(e)));details.append(track);s.append(details)}if(!events.length)s.append(el('p','empty-event','現在公開中のお知らせはありません。'))}
 if(id==='cast'){s=section(id,'CAST','迷宮のナイトたち');s.insertAdjacentHTML('beforeend',"<div class=\"cast-wrap\"><section id=\"list\"><div id=\"cards\" class=\"grid\"></div><p id=\"empty\" class=\"center sub\">キャスト情報を読み込み中…</p></section><section id=\"detail\" class=\"hidden detail panel center\"><button class=\"secondary\" id=\"backBtn\">← 一覧へ</button><div><img id=\"detailImg\" class=\"portrait\" alt=\"キャスト写真\"></div><h2 id=\"detailName\"></h2><p id=\"detailHobby\"></p><div id=\"detailFields\" class=\"profile-fields\"></div><div id=\"detailSocial\" class=\"social-links\"></div><div class=\"bio-box\"><p id=\"detailIntro\"></p></div><div id=\"gallerySection\" class=\"bio-box hidden\"><h3>PHOTO GALLERY</h3><div id=\"detailGallery\" class=\"gallery-grid\"></div></div></section></div>")}
 if(id==='system'){s=section(id,'SYSTEM','料金システム');const g=el('div','plans');(site.plans||[]).forEach(p=>{const d=el('article','plan');d.append(el('h3','',p.title),el('strong','',p.price),el('p','',p.description));g.append(d)});s.append(g,el('h3','','ご案内・注意事項'),el('div','panel-text',site.notices||''))}
 if(id==='access'){s=section(id,'ACCESS','店舗へのご案内');const d=el('div','panel-text');d.append(el('p','','営業時間：'+(site.hours||'')));if(site.address)d.append(el('p','','所在地：'+site.address));if(safeUrl(site.mapUrl)){const a=el('a','gold-btn','地図を開く');a.href=safeUrl(site.mapUrl);a.target='_blank';a.rel='noopener noreferrer';d.append(a)}if(safeUrl(site.instagram)){const a=el('a','gold-btn','公式Instagram');a.href=safeUrl(site.instagram);a.target='_blank';a.rel='noopener noreferrer';d.append(a)}s.append(d)}
 if(s){root.append(s);(site.blocks||[]).filter(b=>b.section===id&&b.visible!==false).forEach(b=>{const d=el('div','custom-block');if(b.type==='image'&&b.src)d.append(makeImage(b.src,b.text));if(b.text)d.append(el('p','',b.text));s.append(d)})}
 }
-if(!document.getElementById('cast')){const hidden=el('div','hidden');hidden.id='cast';hidden.innerHTML="<div class=\"cast-wrap\"><section id=\"list\"><div id=\"cards\" class=\"grid\"></div><p id=\"empty\" class=\"center sub\">キャスト情報を読み込み中…</p></section><section id=\"detail\" class=\"hidden detail panel center\"><button class=\"secondary\" id=\"backBtn\">← 一覧へ</button><div><img id=\"detailImg\" class=\"portrait\" alt=\"キャスト写真\"></div><h2 id=\"detailName\"></h2><p id=\"detailHobby\"></p><div id=\"detailFields\" class=\"profile-fields\"></div><div id=\"detailSocial\" class=\"social-links\"></div><div class=\"bio-box\"><p id=\"detailIntro\"></p></div><div id=\"gallerySection\" class=\"bio-box hidden\"><h3>PHOTO GALLERY</h3><div id=\"detailGallery\" class=\"gallery-grid\"></div></div></section></div>";root.append(hidden)}
+const castSection=document.getElementById('cast');
+ const pinnedSection=document.getElementById('pinnedTopics');
+ if(castSection&&pinnedSection)root.insertBefore(pinnedSection,castSection);
+ const archiveSection=document.getElementById('events');
+ if(castSection&&archiveSection)castSection.after(archiveSection);
+ if(!document.getElementById('cast')){const hidden=el('div','hidden');hidden.id='cast';hidden.innerHTML="<div class=\"cast-wrap\"><section id=\"list\"><div id=\"cards\" class=\"grid\"></div><p id=\"empty\" class=\"center sub\">キャスト情報を読み込み中…</p></section><section id=\"detail\" class=\"hidden detail panel center\"><button class=\"secondary\" id=\"backBtn\">← 一覧へ</button><div><img id=\"detailImg\" class=\"portrait\" alt=\"キャスト写真\"></div><h2 id=\"detailName\"></h2><p id=\"detailHobby\"></p><div id=\"detailFields\" class=\"profile-fields\"></div><div id=\"detailSocial\" class=\"social-links\"></div><div class=\"bio-box\"><p id=\"detailIntro\"></p></div><div id=\"gallerySection\" class=\"bio-box hidden\"><h3>PHOTO GALLERY</h3><div id=\"detailGallery\" class=\"gallery-grid\"></div></div></section></div>";root.append(hidden)}
 render();
 const back=$('backBtn');if(back)back.onclick=showList;
 }
