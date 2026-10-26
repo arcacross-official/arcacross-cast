@@ -1,6 +1,28 @@
 <!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>アルカクロス 公式サイト管理</title><style>
 :root{font-family:system-ui,sans-serif;color:#f4e9d4;background:#0e1729}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#263b5a,#0e1729 70%);min-height:100vh}.wrap{max-width:1050px;margin:auto;padding:22px 14px}h1,h2{color:#e9cc94}h1{font-family:Georgia,serif}h2{font-size:19px}p,.muted{color:#c2bbac;font-size:13px;line-height:1.6}.panel{background:#1b2941;border:1px solid #786748;border-radius:14px;padding:18px;margin:14px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}.item{border:1px solid #73664f;border-radius:10px;padding:13px;background:#182237;margin:9px 0}.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:space-between}.row>strong{flex:1}input,textarea,select{display:block;width:100%;border:1px solid #776c58;background:#0e1729;color:white;border-radius:8px;padding:11px;margin:7px 0 12px;font:inherit}textarea{min-height:90px;resize:vertical}label{display:block;font-size:13px;color:#e4cda1;margin-top:10px}button,.btn{background:#594932;border:1px solid #c4a66c;color:#fff1d2;border-radius:8px;padding:9px 12px;cursor:pointer;font:inherit;text-decoration:none;display:inline-block}button.secondary{background:#29354a}button.danger{background:#683b43}button:disabled{opacity:.5;cursor:not-allowed}.small{font-size:12px}.hidden{display:none!important}.sticky{position:sticky;top:0;z-index:10;background:#10192df0;padding:12px;border-bottom:1px solid #65573c}.notice{padding:10px 12px;border-radius:8px;background:#203a39;color:#c4efda;font-size:13px}.error{background:#482b34;color:#ffd9d9}.preview{width:100%;min-height:350px;border:1px solid #796c55;border-radius:12px;background:white}.preview-image{width:120px;max-height:180px;object-fit:contain;margin:8px 0;border-radius:7px}.drop{border:1px dashed #ae986b;padding:15px;border-radius:9px}.check{display:inline-flex;align-items:center;gap:5px;margin:8px 10px 8px 0}.check input{width:auto;margin:0}.dragging{opacity:.4}.drag-handle{cursor:grab;touch-action:none;color:#e3c990;font-size:22px;user-select:none} @media(max-width:550px){.wrap{padding:10px}.panel{padding:12px}.sticky{padding:8px}}
-</style></head><body><div class="sticky"><div class="wrap row" style="padding:0"><strong>⚜ ARCACROSS 公式サイト管理</strong><div><a class="btn" href="../public/" target="_blank">公式サイト ↗</a> <button id="logout" class="secondary hidden">ログアウト</button></div></div></div><main class="wrap"><section id="loginPanel" class="panel"><h2>管理者ログイン</h2><p>店舗用と同じFirebase管理者アカウントでログインしてください。</p><label>メールアドレス<input id="email" type="email" autocomplete="username"></label><label>パスワード<input id="password" type="password" autocomplete="current-password"></label><button id="login">ログイン</button><p id="loginMsg"></p></section><section id="editor" class="hidden"><div class="row"><div><h1>公式サイト編集</h1><p>下書き編集 → プレビュー → 公開。公開時にFirestoreへ保存します。</p></div><button id="publish">変更を公開する</button></div><p id="message" class="notice">読み込み中…</p><div class="panel"><h2>ページ構成・順番</h2><p>≡ をドラッグして並び替え。上下ボタンでも移動できます。</p><div id="sections"></div></div><div class="panel"><h2>CONCEPT</h2><label>世界観・コンセプト<textarea id="concept" rows="6"></textarea></label></div><div class="panel"><div class="row"><h2>TOPICS｜お知らせ・イベント</h2><button id="addEvent">＋ TOPICS追加</button></div><p>画像は1〜2枚登録できます。開催終了後も自動で過去のTOPICSに表示されます。画像はFirebase Storageを使わずに保存します。</p><div id="events"></div></div><div class="panel"><div class="row"><h2>SYSTEM｜料金プラン</h2><button id="addPlan">＋ プラン追加</button></div><div id="plans"></div><label>注意事項<textarea id="notices" rows="7"></textarea></label></div><div class="panel"><h2>ACCESS</h2><label>営業時間<input id="hours"></label><label>所在地<input id="address"></label><label>GoogleマップURL<input id="mapUrl" placeholder="https://maps.google.com/..."></label><label>公式Instagram URL<input id="instagram" placeholder="https://www.instagram.com/..."></label></div><div class="panel"><div class="row"><h2>追加コンテンツ</h2><button id="addBlock">＋ 画像・文章ブロック</button></div><p>画像や文章を好きなセクションの下へ追加できます。</p><div id="blocks"></div></div><div class="panel"><h2>プレビュー</h2><p>保存前の下書きをプレビュー表示します。</p><button id="preview">下書きをプレビュー</button><iframe id="previewFrame" class="preview hidden" title="プレビュー"></iframe></div><div class="row"><button id="publishBottom">変更を公開する</button><span class="muted">店舗用キャスト管理画面は変更しません。</span></div></section></main><script type="module">
+
+.topic-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.topic-toolbar button.active{background:#a88850;color:#10192d;font-weight:800}
+.topic-list{display:grid;gap:9px}
+.topic-card{display:flex;gap:12px;align-items:center;text-align:left;width:100%;background:#15243c;border:1px solid #77664a;padding:12px;border-radius:12px}
+.topic-card:hover{border-color:#ebca89;background:#223551}
+.topic-thumb{width:64px;height:76px;flex:none;object-fit:cover;background:#0d1829;border-radius:7px}
+.topic-details{min-width:0;flex:1}
+.topic-details strong{display:block;color:#fff0cc;overflow-wrap:anywhere}
+.topic-details small{display:block;color:#bdb8b0;margin-top:4px}
+.topic-pill{font-size:11px;color:#f2d49b}
+.topic-modal{position:fixed;inset:0;z-index:80;background:#050c18df;display:flex;align-items:center;justify-content:center;padding:12px}
+.topic-dialog{background:#1b2941;border:1px solid #bc9b62;border-radius:16px;padding:18px;width:min(720px,100%);max-height:94vh;overflow-y:auto;box-shadow:0 20px 80px #0009}
+.topic-dialog h2{margin:0}
+.topic-modal-header{position:sticky;top:-18px;background:#1b2941;z-index:2;padding:12px 0;border-bottom:1px solid #6c5d43}
+.publish-overlay{position:fixed;inset:0;z-index:150;background:#071021df;display:flex;align-items:center;justify-content:center;padding:20px}
+.publish-card{text-align:center;width:min(430px,100%);background:linear-gradient(145deg,#273e5a,#17253b);border:2px solid #d7b775;border-radius:20px;padding:32px 18px;box-shadow:0 15px 90px #0009}
+.publish-symbol{font-size:65px;line-height:1.2}
+.publish-card h2{font-size:27px;margin:14px 0 6px}
+.publish-card p{font-size:15px;color:#f0e4ce}
+.publish-card button{font-size:16px;padding:12px 25px;margin-top:14px}
+@media(max-width:550px){.topic-dialog{padding:12px}.topic-thumb{width:52px;height:64px}.publish-card h2{font-size:23px}}
+</style></head><body><div class="sticky"><div class="wrap row" style="padding:0"><strong>⚜ ARCACROSS 公式サイト管理</strong><div><a class="btn" href="../public/" target="_blank">公式サイト ↗</a> <button id="logout" class="secondary hidden">ログアウト</button></div></div></div><main class="wrap"><section id="loginPanel" class="panel"><h2>管理者ログイン</h2><p>店舗用と同じFirebase管理者アカウントでログインしてください。</p><label>メールアドレス<input id="email" type="email" autocomplete="username"></label><label>パスワード<input id="password" type="password" autocomplete="current-password"></label><button id="login">ログイン</button><p id="loginMsg"></p></section><section id="editor" class="hidden"><div class="row"><div><h1>公式サイト編集</h1><p>下書き編集 → プレビュー → 公開。公開時にFirestoreへ保存します。</p></div><button id="publish">変更を公開する</button></div><p id="message" class="notice">読み込み中…</p><div class="panel"><h2>ページ構成・順番</h2><p>≡ をドラッグして並び替え。上下ボタンでも移動できます。</p><div id="sections"></div></div><div class="panel"><h2>CONCEPT</h2><label>世界観・コンセプト<textarea id="concept" rows="6"></textarea></label></div><div class="panel"><div class="row"><h2>TOPICS｜お知らせ・イベント</h2><button id="addEvent">＋ TOPICS追加</button></div><p>画像は1〜2枚登録できます。開催終了後も自動で過去のTOPICSに表示されます。画像はFirebase Storageを使わずに保存します。</p><div id="topicFilters" class="topic-toolbar"></div><div id="events" class="topic-list"></div></div><div class="panel"><div class="row"><h2>SYSTEM｜料金プラン</h2><button id="addPlan">＋ プラン追加</button></div><div id="plans"></div><label>注意事項<textarea id="notices" rows="7"></textarea></label></div><div class="panel"><h2>ACCESS</h2><label>営業時間<input id="hours"></label><label>所在地<input id="address"></label><label>GoogleマップURL<input id="mapUrl" placeholder="https://maps.google.com/..."></label><label>公式Instagram URL<input id="instagram" placeholder="https://www.instagram.com/..."></label></div><div class="panel"><div class="row"><h2>追加コンテンツ</h2><button id="addBlock">＋ 画像・文章ブロック</button></div><p>画像や文章を好きなセクションの下へ追加できます。</p><div id="blocks"></div></div><div class="panel"><h2>プレビュー</h2><p>保存前の下書きをプレビュー表示します。</p><button id="preview">下書きをプレビュー</button><iframe id="previewFrame" class="preview hidden" title="プレビュー"></iframe></div><div class="row"><button id="publishBottom">変更を公開する</button><span class="muted">店舗用キャスト管理画面は変更しません。</span></div></section></main><div id="topicModal" class="topic-modal hidden" role="dialog" aria-modal="true" aria-label="TOPICS編集"><div class="topic-dialog"><div class="topic-modal-header row"><h2 id="topicModalTitle">TOPICS編集</h2><button id="closeTopic" class="secondary">✕ 閉じる</button></div><div id="topicEditBody"></div></div></div><div id="publishOverlay" class="publish-overlay hidden" role="alertdialog" aria-modal="true"><div class="publish-card"><div id="publishSymbol" class="publish-symbol">✨</div><h2 id="publishTitle">公開しました！</h2><p id="publishDetail">公式サイトに変更を反映しました。</p><button id="dismissPublish">OK！</button></div></div><script type="module">
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js';
 import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js';
 import {getFirestore,doc,getDoc,setDoc} from 'https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js';
@@ -52,24 +74,73 @@ function uploadField(images,onAdd,limit=2){
    const id=crypto.randomUUID().replace(/-/g,'');
    await setDoc(topicImageDoc(id),{data:dataUrl,createdAt:Date.now()});
    onAdd(IMAGE_PREFIX+id)
-  }dirty=true;render();status('画像を保存しました。「変更を公開する」で反映してください。')}
-  catch(err){render();status('画像の保存に失敗：'+err.message+'（Firestoreの画像保存権限を確認してください）',true)}
+  }dirty=true;render();if(editingTopic>=0)openTopic(editingTopic);status('画像を保存しました。「変更を公開する」で反映してください。')}
+  catch(err){render();if(editingTopic>=0)openTopic(editingTopic);status('画像の保存に失敗：'+err.message+'（Firestoreの画像保存権限を確認してください）',true)}
  };
  w.append(input);
  images.forEach((url,i)=>{const row=mk('div',undefined,'row');const img=mk('img',undefined,'preview-image');imagePreview(img,url);row.append(img,btn('画像を外す',()=>{images.splice(i,1);dirty=true;render()},'danger'));w.append(row)});
  return w
 }
-function renderEvents(){const c=$('events');c.replaceChildren();data.events.forEach((e,i)=>{const box=mk('div',undefined,'item');const h=reorderBox(data.events,i,e.title||'新しいイベント',render);h.append(btn('削除',()=>{if(confirm('イベントを削除しますか？')){data.events.splice(i,1);dirty=true;render()}},'danger'));box.append(h,field('イベント名',e.title,v=>e.title=v),field('開催日時（自由入力）',e.date,v=>e.date=v),field('終了日（自動アーカイブ用・YYYY-MM-DD）',e.endDate||'',v=>e.endDate=v),field('詳細説明',e.description,v=>e.description=v,true),field('チケット・詳細リンク',e.link,v=>e.link=v));const flags=mk('div');flags.append(checkbox('公開',e.published!==false,v=>e.published=v),checkbox('注目イベントとして固定',e.pinned,v=>e.pinned=v),checkbox('トップ大型バナーに表示',e.hero,v=>e.hero=v));box.append(flags,uploadField(e.images,src=>e.images.push(src),2),field('画像URLを直接追加（1行1URL）','',v=>{e._pendingUrls=v},true));const add=btn('画像URLを追加',()=>{const arr=String(e._pendingUrls||'').split(/\s+/).filter(v=>/^https?:\/\//.test(v));e.images.push(...arr.slice(0,Math.max(0,2-e.images.length)));e._pendingUrls='';dirty=true;render()});box.append(add);c.append(box)})}
+let topicFilter='upcoming',editingTopic=-1,publishing=false;
+function topicPast(e){if(!e.endDate)return false;const end=String(e.endDate).trim();return /^\\d{4}-\\d{2}-\\d{2}$/.test(end)&&end<new Date().toLocaleDateString('sv-SE',{timeZone:'Asia/Tokyo'})}
+function topicGroup(e){if(e.published===false)return 'hidden';return topicPast(e)?'past':'upcoming'}
+function openTopic(i){editingTopic=i;renderTopicEditor();$('topicModal').classList.remove('hidden');document.body.style.overflow='hidden'}
+function closeTopic(){editingTopic=-1;$('topicModal').classList.add('hidden');document.body.style.overflow=''}
+$('closeTopic').onclick=closeTopic;
+$('topicModal').onclick=e=>{if(e.target===$('topicModal'))closeTopic()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('topicModal').classList.contains('hidden'))closeTopic()});
+function renderTopicEditor(){
+ const e=data.events[editingTopic];if(!e){closeTopic();return}
+ const i=editingTopic,box=$('topicEditBody');box.replaceChildren();
+ $('topicModalTitle').textContent=e.title||'新しいTOPICS';
+ box.append(field('イベント名',e.title,v=>{e.title=v;$('topicModalTitle').textContent=v||'新しいTOPICS'}),field('開催日時（自由入力）',e.date,v=>e.date=v),field('終了日（自動アーカイブ用・YYYY-MM-DD）',e.endDate||'',v=>e.endDate=v),field('詳細説明',e.description,v=>e.description=v,true),field('チケット・詳細リンク',e.link,v=>e.link=v));
+ const flags=mk('div');flags.append(checkbox('公開',e.published!==false,v=>e.published=v),checkbox('注目イベントとして固定',e.pinned,v=>e.pinned=v),checkbox('トップ大型バナーに表示',e.hero,v=>e.hero=v));box.append(flags);
+ box.append(uploadField(e.images,src=>e.images.push(src),2),field('画像URLを直接追加（1行1URL）',e._pendingUrls||'',v=>{e._pendingUrls=v},true));
+ box.append(btn('画像URLを追加',()=>{const arr=String(e._pendingUrls||'').split(/\\s+/).filter(v=>/^https?:\\/\\//.test(v));e.images.push(...arr.slice(0,Math.max(0,2-e.images.length)));e._pendingUrls='';dirty=true;render();openTopic(i)}));
+ const foot=mk('div',undefined,'row');foot.style.marginTop='18px';
+ foot.append(btn('← 一覧に戻る',()=>{closeTopic();renderEvents()}),btn('このTOPICSを削除',()=>{if(confirm('このTOPICSを削除しますか？')){data.events.splice(i,1);dirty=true;closeTopic();renderEvents()}},'danger'));
+ box.append(foot)
+}
+function renderEvents(){
+ const filters=$('topicFilters'),c=$('events');filters.replaceChildren();c.replaceChildren();
+ for(const [key,label] of [['upcoming','開催予定・最新'],['past','過去のTOPICS'],['hidden','非公開'],['all','すべて']]){
+  const count=key==='all'?data.events.length:data.events.filter(e=>topicGroup(e)===key).length;
+  const b=btn(label+'（'+count+'）',()=>{topicFilter=key;renderEvents()},topicFilter===key?'active':'secondary');filters.append(b)
+ }
+ const visible=data.events.map((e,i)=>({e,i})).filter(({e})=>topicFilter==='all'||topicGroup(e)===topicFilter);
+ if(!visible.length){c.append(mk('p','この分類にはまだTOPICSがありません。'));return}
+ visible.forEach(({e,i})=>{
+  const b=mk('button',undefined,'topic-card');b.type='button';b.onclick=()=>openTopic(i);
+  const img=mk('img',undefined,'topic-thumb');img.alt='';if(e.images?.[0])imagePreview(img,e.images[0]);
+  const d=mk('div',undefined,'topic-details');d.append(mk('strong',e.title||'タイトル未設定'),mk('small',e.date||'開催日時未設定'),mk('span',topicGroup(e)==='hidden'?'非公開':topicGroup(e)==='past'?'過去イベント':'公開中','topic-pill'));
+  b.append(img,d,mk('span','編集 ›'));c.append(b)
+ })
+}
 function renderBlocks(){const c=$('blocks');c.replaceChildren();data.blocks.forEach((b,i)=>{const box=mk('div',undefined,'item');const h=reorderBox(data.blocks,i,b.type==='image'?'画像ブロック':'文章ブロック',render);h.append(btn('削除',()=>{data.blocks.splice(i,1);dirty=true;render()},'danger'));box.append(h);const select=mk('select');for(const id of data.sections){const o=mk('option',sectionNames[id]);o.value=id;select.append(o)}select.value=b.section;select.onchange=()=>{b.section=select.value;dirty=true};box.append(mk('label','表示位置'),select);box.append(checkbox('表示する',b.visible!==false,v=>b.visible=v));const type=mk('select');for(const t of ['image','text']){const o=mk('option',t==='image'?'画像＋文章':'文章のみ');o.value=t;type.append(o)}type.value=b.type;type.onchange=()=>{b.type=type.value;dirty=true;render()};box.append(mk('label','ブロック種類'),type);if(b.type==='image')box.append(uploadField(b.src?[b.src]:[],src=>b.src=src),field('画像URL',b.src||'',v=>b.src=v));box.append(field('本文・説明',b.text||'',v=>b.text=v,true));c.append(box)})}
 function render(){renderSections();renderPlans();renderEvents();renderBlocks();for(const id of ['concept','notices','hours','address','mapUrl','instagram'])$(id).value=data[id]||''}
 for(const id of ['concept','notices','hours','address','mapUrl','instagram'])$(id).oninput=e=>{data[id]=e.target.value;dirty=true};
-$('addEvent').onclick=()=>{data.events.unshift({title:'',date:'',description:'',link:'',images:[],endDate:'',published:true,pinned:false,hero:false});dirty=true;render();$('events').scrollIntoView({behavior:'smooth'})};
+$('addEvent').onclick=()=>{data.events.unshift({title:'',date:'',description:'',link:'',images:[],endDate:'',published:true,pinned:false,hero:false});dirty=true;topicFilter='upcoming';render();openTopic(0)};
 $('addPlan').onclick=()=>{data.plans.push({title:'',price:'',description:''});dirty=true;render()};
 $('addBlock').onclick=()=>{data.blocks.push({type:'image',section:'events',src:'',text:'',visible:true});dirty=true;render()};
 $('login').onclick=async()=>{try{$('loginMsg').textContent='ログイン中…';await signInWithEmailAndPassword(auth,$('email').value.trim(),$('password').value);$('password').value=''}catch(e){$('loginMsg').textContent='ログイン失敗：'+e.message}};
 $('logout').onclick=()=>signOut(auth);
 onAuthStateChanged(auth,async user=>{$('loginPanel').classList.toggle('hidden',!!user);$('editor').classList.toggle('hidden',!user);$('logout').classList.toggle('hidden',!user);if(!user)return;try{const snap=await getDoc(siteRef);data={...structuredClone(DEFAULTS),...(snap.exists()?snap.data():{})};data.events=(data.events||[]).map(e=>({...e,images:e.images||[]}));render();status('編集できます。公開するまでお客様のサイトは変わりません。')}catch(e){status('読み込みに失敗：'+e.message+'（Firestoreのアクセス権をご確認ください）',true)}});
-async function publish(){if(!auth.currentUser)return;const save=structuredClone(data);save.events.forEach((e,i)=>{delete e._pendingUrls;e.order=i});try{status('公開中…');await setDoc(siteRef,save);dirty=false;status('公開しました！公式サイトを更新してご確認ください。')}catch(e){status('公開に失敗：'+e.message+'（Firestoreの管理者書き込み権限をご確認ください）',true)}}
+function showPublishResult(ok,detail){
+ $('publishOverlay').classList.remove('hidden');
+ $('publishSymbol').textContent=ok?'🎉':'⚠️';
+ $('publishTitle').textContent=ok?'公開完了！':'公開できませんでした';
+ $('publishDetail').textContent=detail;
+ $('dismissPublish').focus()
+}
+$('dismissPublish').onclick=()=>$('publishOverlay').classList.add('hidden');
+async function publish(){
+ if(!auth.currentUser||publishing)return;
+ const save=structuredClone(data);save.events.forEach((e,i)=>{delete e._pendingUrls;e.order=i});
+ publishing=true;$('publish').disabled=true;$('publishBottom').disabled=true;
+ try{status('公開中…');await setDoc(siteRef,save);dirty=false;status('公開しました！公式サイトを更新してご確認ください。');closeTopic();renderEvents();showPublishResult(true,'公式サイトへの保存が完了しました。')}
+ catch(e){status('公開に失敗：'+e.message,true);showPublishResult(false,'Firebaseへの保存に失敗しました：'+e.message)}
+ finally{publishing=false;$('publish').disabled=false;$('publishBottom').disabled=false}
+}
 $('publish').onclick=publish;$('publishBottom').onclick=publish;
 $('preview').onclick=()=>{const frame=$('previewFrame');frame.classList.remove('hidden');const base='../public/';frame.onload=()=>frame.contentWindow.postMessage({type:'arcacross-site-preview',payload:structuredClone(data)},location.origin);frame.src=base;status('下書きプレビューを開きました。内容を変更したらもう一度プレビューを押してください。')};
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
