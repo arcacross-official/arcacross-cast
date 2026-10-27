@@ -345,7 +345,7 @@ function renderAdmin(){const box=$('entries');box.replaceChildren();members.forE
        c.drawImage(img,x+(cellW-w)*(px/100),y+(imgH-h)*(py/100),w,h);c.restore();
      }else{failed++;text(c,'✦',x+cellW/2,y+imgH/2,cellW-15,32)}
      const hasRole=!!(m.pinnedRole&&String(m.roleTitle||'').trim());
-     c.strokeStyle=hasRole?'#f4d487':'#7896bd';c.lineWidth=hasRole?3:1.5;c.strokeRect(x+1,y+1,cellW-2,cardH-2);
+     c.strokeStyle=m.pinnedRole?'#f4d487':'#7896bd';c.lineWidth=m.pinnedRole?3:1.5;c.strokeRect(x+1,y+1,cellW-2,cardH-2);
      if(hasRole){line(c,x+4,y+imgH,cellW-8,1,'#e9c775');text(c,m.roleTitle.trim(),x+cellW/2,y+imgH+Math.max(8,(cardH-imgH)*.23),cellW-8,rows>=3?8:11,'700','#f7d991')}
      const nameY=y+imgH+(cardH-imgH)*(hasRole ? .72 : .55);
      text(c,m.name,x+cellW/2,nameY,cellW-10,rows===1?22:rows===2?16:rows===3?12:10,'700','#fff3d4');
